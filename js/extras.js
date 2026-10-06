@@ -36,6 +36,7 @@
   state.achievements = Array.isArray(state.achievements) ? state.achievements : [];
   state.stars = Array.isArray(state.stars) ? state.stars : [];
   state.doors = Array.isArray(state.doors) ? state.doors : [];
+  state.history = Array.isArray(state.history) ? state.history : [];
 
   function save(){ try { localStorage.setItem(key,JSON.stringify(state)); } catch {} }
   function has(id){ return state.achievements.includes(id); }
@@ -56,7 +57,9 @@
     if(has(id)) return;
     const item=ACHIEVEMENTS.find(x=>x.id===id);
     if(!item) return;
-    state.achievements.push(id); save(); renderProgress(); notify(item.name);
+    state.achievements.push(id);
+    state.history.push({id,name:item.name,at:new Date().toISOString()});
+    save(); renderProgress(); notify(item.name);
     if(state.achievements.length>=7 && !has("explorer")){
       state.achievements.push("explorer"); save(); renderProgress(); notify("Archivo secreto desbloqueado");
     }
@@ -75,7 +78,7 @@
     const count=state.achievements.length;
     document.getElementById("exploreCounter").textContent=count+" / "+ACHIEVEMENTS.length;
     document.getElementById("secretProgressBar").style.width=(count/ACHIEVEMENTS.length*100)+"%";
-    document.getElementById("secretProgressText").textContent=count>=5?"El archivo secreto ya puede abrirse.":"Encuentra secretos y completa pequeñas misiones.";
+    document.getElementById("secretProgressText").textContent=count>=7?"El archivo secreto ya puede abrirse.":"Encuentra secretos y completa pequeñas misiones.";
     const grid=document.getElementById("badgeGrid");
     grid.innerHTML="";
     ACHIEVEMENTS.forEach(a=>{
@@ -214,9 +217,6 @@
   document.querySelectorAll(".open-when").forEach(x=>x.addEventListener("click",()=>{state.openedEnvelope=true;save();}));
   document.getElementById("spinPlan").addEventListener("click",()=>{state.usedWheel=true;save();});
 
-  window.mirandaUnlock = unlock;
-  window.mirandaRenderProgress = renderProgress;
-  window.mirandaExplorationState = state;
   window.mirandaUnlock = unlock;
   window.mirandaRenderProgress = renderProgress;
   window.mirandaExplorationState = state;
