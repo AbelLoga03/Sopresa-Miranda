@@ -84,3 +84,18 @@ El panel permite:
 - Reiniciar todo el progreso y las cachés locales.
 
 El panel es una herramienta de prueba, no un sistema de seguridad.
+
+
+## Ruleta y planificador de citas
+
+La ruleta incluye ahora una colección amplia de ideas y permite:
+
+- Guardar un resultado para hacerlo más adelante.
+- Elegir fecha, hora y una nota.
+- Filtrar planes pendientes, programados y realizados.
+- Marcar un plan como hecho o recuperarlo.
+- Añadir ideas propias.
+- Exportar planes con fecha mediante un archivo `.ics` compatible con calendarios habituales.
+- Conservar los planes mediante `localStorage` en el navegador.
+
+Los planes guardados localmente no se sincronizan automáticamente entre dispositivos.
