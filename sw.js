@@ -1,8 +1,8 @@
-const CACHE="miranda-v4";
+const CACHE="miranda-v5";
 const ASSETS=[
   "./","./index.html","./archivo.html","./404.html","./manifest.json",
-  "./css/style.css","./css/extras.css","./css/special.css",
-  "./js/app.js","./js/extras.js","./js/special.js","./assets/favicon.svg"
+  "./css/style.css","./css/extras.css","./css/special.css","./css/ultimate.css",
+  "./js/app.js","./js/extras.js","./js/special.js","./js/ultimate.js","./assets/favicon.svg"
 ];
 self.addEventListener("install",event=>{
   event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).catch(()=>{}));
