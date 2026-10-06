@@ -1,5 +1,8 @@
 /* Microdetalles de la edición 23 */
-.micro-chapter-strip{grid-column:1/-1;display:grid;grid-template-columns:repeat(23,minmax(8px,1fr));gap:4px;width:100%;margin-top:8px}
+.topbar{flex-wrap:wrap}
+.scene{position:relative}
+
+.micro-chapter-strip{flex:1 0 100%;grid-column:1/-1;display:grid;grid-template-columns:repeat(23,minmax(8px,1fr));gap:4px;width:100%;margin-top:8px}
 .micro-chapter-dot{height:6px;border:0;border-radius:999px;background:rgba(255,255,255,.09);padding:0;cursor:pointer;transition:.22s;position:relative}
 .micro-chapter-dot:hover{background:rgba(255,255,255,.24);transform:scaleY(1.5)}
 .micro-chapter-dot.visited{background:rgba(217,160,173,.32)}
