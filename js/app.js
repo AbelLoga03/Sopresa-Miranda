@@ -1,7 +1,7 @@
 (() => {
   const CONFIG = {
     birthdayMonth: 5,
-    birthdayDay: 17
+    birthdayDay: 17,
     relationshipStart: null, // Ejemplo: "2025-02-14"
     reasons: [
       "Aquí aparecerá una razón personal que quieras dedicarle.",
