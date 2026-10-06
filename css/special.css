@@ -17,3 +17,6 @@
 
 @media(max-width:760px){.birthday-banner{top:8px;width:calc(100% - 24px);justify-content:center;text-align:center;border-radius:18px}.do-not-press{top:auto;bottom:68px;right:12px}.puzzle-wrap{grid-template-columns:1fr}.puzzle-side{padding:18px}.bingo-grid button{min-height:100px}.credits-stage{height:320px}}
 @media(max-width:420px){.bingo-grid{grid-template-columns:1fr 1fr}.bingo-center{grid-column:1/-1}.movie-ticket{padding:20px 16px}}
+.install-app{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:13;border:1px solid rgba(205,179,130,.35);background:rgba(20,15,21,.92);backdrop-filter:blur(12px);color:var(--text);border-radius:999px;padding:10px 14px;cursor:pointer;box-shadow:var(--shadow);font-size:.78rem}
+.install-app:hover{border-color:var(--gold)}
+@media(max-width:760px){.install-app{bottom:14px;max-width:46%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
