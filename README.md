@@ -128,3 +128,15 @@ La experiencia mantiene exactamente 23 capítulos y añade:
 - Reinicio DEV ampliado para borrar también favoritos, planes y microsecretos.
 
 Los favoritos y el progreso se almacenan localmente en el navegador.
+
+
+## Radar de pistas
+
+Cada uno de los 23 capítulos dispone de un botón de pista con dos modos:
+
+- **En este capítulo**: ofrece tres niveles progresivos de ayuda, desde una pista sutil hasta una casi directa.
+- **Dónde buscar después**: localiza automáticamente otro capítulo con secretos pendientes y orienta hacia él.
+
+El sistema detecta parte del progreso guardado (logros, detalles 23/23 y mini secretos) para evitar recomendar capítulos ya completados. Las pistas usadas se contabilizan en las estadísticas finales, se incluyen en la copia de seguridad y se eliminan con el reinicio DEV.
+
+Atajo de teclado: **H** abre o cierra la pista del capítulo activo cuando no se está escribiendo en un campo.
