@@ -119,6 +119,26 @@
     unlock("credits");
   });
 
+  // Installable mini-app + offline cache.
+  let deferredInstall=null;
+  const installButton=document.getElementById("installApp");
+  window.addEventListener("beforeinstallprompt",e=>{
+    e.preventDefault();
+    deferredInstall=e;
+    installButton?.classList.remove("hidden");
+  });
+  installButton?.addEventListener("click",async()=>{
+    if(!deferredInstall)return;
+    deferredInstall.prompt();
+    try{await deferredInstall.userChoice;}catch{}
+    deferredInstall=null;
+    installButton.classList.add("hidden");
+  });
+  window.addEventListener("appinstalled",()=>installButton?.classList.add("hidden"));
+  if("serviceWorker" in navigator){
+    window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+  }
+
   // Birthday extra wording.
   if(isBirthday){
     const finale=document.querySelector('[data-scene-id="finale"] .kicker');
