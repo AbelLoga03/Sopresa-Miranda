@@ -1,6 +1,7 @@
 (() => {
   const CONFIG = {
-    birthday: null, // Ejemplo: "2026-11-18T00:00:00"
+    birthdayMonth: 5,
+    birthdayDay: 17
     relationshipStart: null, // Ejemplo: "2025-02-14"
     reasons: [
       "Aquí aparecerá una razón personal que quieras dedicarle.",
@@ -186,14 +187,12 @@
 
   function updateCountdown() {
     const message = document.getElementById("countdownMessage");
-    if (!CONFIG.birthday) {
-      message.textContent = "La fecha se añadirá cuando personalicemos la versión final.";
-      return;
-    }
     const now = new Date();
-    const target = new Date(CONFIG.birthday);
+    let target = new Date(now.getFullYear(), CONFIG.birthdayMonth - 1, CONFIG.birthdayDay, 0, 0, 0);
+    if (now >= target) {
+      target = new Date(now.getFullYear() + 1, CONFIG.birthdayMonth - 1, CONFIG.birthdayDay, 0, 0, 0);
+    }
     let diff = target - now;
-    if (Number.isNaN(target.getTime())) return;
     if (diff <= 0) {
       document.getElementById("days").textContent = "0";
       document.getElementById("hours").textContent = "0";
@@ -210,7 +209,7 @@
     document.getElementById("hours").textContent = h;
     document.getElementById("minutes").textContent = m;
     document.getElementById("seconds").textContent = s;
-    message.textContent = "Cada segundo acerca un poco más la sorpresa.";
+    message.textContent = "Cuenta atrás hasta el 17 de mayo ✦";
   }
   updateCountdown();
   setInterval(updateCountdown, 1000);
