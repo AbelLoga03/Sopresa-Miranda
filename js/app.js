@@ -188,12 +188,11 @@
   function updateCountdown() {
     const message = document.getElementById("countdownMessage");
     const now = new Date();
-    let target = new Date(now.getFullYear(), CONFIG.birthdayMonth - 1, CONFIG.birthdayDay, 0, 0, 0);
-    if (now >= target) {
-      target = new Date(now.getFullYear() + 1, CONFIG.birthdayMonth - 1, CONFIG.birthdayDay, 0, 0, 0);
-    }
-    let diff = target - now;
-    if (diff <= 0) {
+    const isBirthday =
+      now.getMonth() === CONFIG.birthdayMonth - 1 &&
+      now.getDate() === CONFIG.birthdayDay;
+
+    if (isBirthday) {
       document.getElementById("days").textContent = "0";
       document.getElementById("hours").textContent = "0";
       document.getElementById("minutes").textContent = "0";
@@ -201,6 +200,12 @@
       message.textContent = "Hoy es el día ✦";
       return;
     }
+
+    let target = new Date(now.getFullYear(), CONFIG.birthdayMonth - 1, CONFIG.birthdayDay, 0, 0, 0);
+    if (now > target) {
+      target = new Date(now.getFullYear() + 1, CONFIG.birthdayMonth - 1, CONFIG.birthdayDay, 0, 0, 0);
+    }
+    let diff = target - now;
     const d = Math.floor(diff / 86400000); diff %= 86400000;
     const h = Math.floor(diff / 3600000); diff %= 3600000;
     const m = Math.floor(diff / 60000); diff %= 60000;
