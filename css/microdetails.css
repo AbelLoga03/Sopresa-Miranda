@@ -1,0 +1,51 @@
+/* Microdetalles de la edición 23 */
+.micro-chapter-strip{grid-column:1/-1;display:grid;grid-template-columns:repeat(23,minmax(8px,1fr));gap:4px;width:100%;margin-top:8px}
+.micro-chapter-dot{height:6px;border:0;border-radius:999px;background:rgba(255,255,255,.09);padding:0;cursor:pointer;transition:.22s;position:relative}
+.micro-chapter-dot:hover{background:rgba(255,255,255,.24);transform:scaleY(1.5)}
+.micro-chapter-dot.visited{background:rgba(217,160,173,.32)}
+.micro-chapter-dot.discovered{background:rgba(205,179,130,.62)}
+.micro-chapter-dot.current{background:var(--text);box-shadow:0 0 10px rgba(255,255,255,.28);transform:scaleY(1.6)}
+.micro-chapter-dot:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+.micro-dust{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.micro-dust-star{position:absolute;color:rgba(255,255,255,.14);font-size:.55rem;animation:microTwinkle var(--twinkle,5s) ease-in-out infinite}
+@keyframes microTwinkle{0%,100%{opacity:.18;transform:scale(.7)}50%{opacity:.72;transform:scale(1.1)}}
+
+.micro-token{position:absolute;z-index:8;width:31px;height:31px;border-radius:50%;border:1px solid rgba(205,179,130,.2);background:rgba(17,13,18,.5);backdrop-filter:blur(8px);color:rgba(205,179,130,.36);display:grid;place-items:center;cursor:pointer;font-size:.8rem;opacity:.42;transition:.22s}
+.micro-token:hover,.micro-token:focus-visible{opacity:1;color:var(--gold);border-color:rgba(205,179,130,.5);transform:rotate(8deg) scale(1.08)}
+.micro-token.found{opacity:.9;color:var(--gold);background:rgba(205,179,130,.08)}
+.micro-token.t1{right:4%;top:24%}.micro-token.t2{left:3%;top:52%}.micro-token.t3{right:7%;bottom:18%}.micro-token.t4{left:6%;top:18%}.micro-token.t5{right:5%;top:44%}
+
+.micro-secret-progress{position:fixed;right:18px;bottom:70px;z-index:14;border:1px solid rgba(205,179,130,.2);background:rgba(16,12,17,.78);backdrop-filter:blur(10px);border-radius:999px;padding:7px 10px;color:var(--muted);font-size:.67rem;opacity:.62;transition:.2s;pointer-events:none}
+.micro-secret-progress strong{color:var(--gold);font-weight:600}
+
+.micro-toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,18px);z-index:140;width:min(520px,calc(100% - 30px));border:1px solid rgba(205,179,130,.3);background:rgba(18,14,20,.97);backdrop-filter:blur(14px);border-radius:18px;padding:12px 15px;text-align:center;color:var(--muted);font-size:.8rem;line-height:1.5;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.25s}
+.micro-toast.show{opacity:1;transform:translate(-50%,0)}
+.micro-toast strong{color:var(--gold)}
+
+.micro-complete-card{position:fixed;inset:0;z-index:145;display:grid;place-items:center;padding:20px;background:rgba(7,5,8,.88)}
+.micro-complete-inner{width:min(560px,100%);border:1px solid rgba(205,179,130,.4);background:#171218;border-radius:28px;padding:30px;text-align:center;box-shadow:var(--shadow)}
+.micro-complete-inner .symbol{font-size:2.5rem;color:var(--gold)}.micro-complete-inner small{display:block;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin:9px 0}.micro-complete-inner strong{display:block;font-family:var(--serif);font-size:clamp(2rem,6vw,3rem);line-height:1}.micro-complete-inner p{color:var(--muted);line-height:1.7}.micro-complete-inner button{margin-top:8px}
+
+.countdown-extra{margin-top:7px!important;color:rgba(255,255,255,.45)!important;font-size:.72rem!important}
+.daily-seal{display:inline-flex;align-items:center;gap:7px;margin:8px auto 0;padding:6px 10px;border:1px dashed rgba(205,179,130,.24);border-radius:999px;color:rgba(255,255,255,.48);font-size:.68rem}
+.daily-seal span{color:var(--gold)}
+
+.footer-secret{cursor:pointer;user-select:none;transition:.2s}.footer-secret:hover{color:var(--gold);transform:scale(1.15)}
+
+.tap-23-counter{position:fixed;left:18px;bottom:18px;z-index:15;color:rgba(255,255,255,.3);font-size:.62rem;opacity:0;transition:.2s;pointer-events:none}
+.tap-23-counter.show{opacity:1}
+
+.micro-visited-stamp{position:absolute;right:16px;top:16px;border:1px solid rgba(255,255,255,.08);border-radius:999px;padding:4px 7px;color:rgba(255,255,255,.22);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;pointer-events:none}
+.scene.active .micro-visited-stamp{color:rgba(255,255,255,.36)}
+
+@media(max-width:760px){
+  .micro-chapter-strip{gap:2px;margin-top:6px}
+  .micro-chapter-dot{height:5px}
+  .micro-secret-progress{right:10px;bottom:112px;font-size:.62rem}
+  .micro-token{width:28px;height:28px}
+}
+@media(prefers-reduced-motion:reduce){
+  .micro-dust-star{animation:none!important}
+  .micro-token,.micro-chapter-dot,.micro-toast{transition:none!important}
+}
