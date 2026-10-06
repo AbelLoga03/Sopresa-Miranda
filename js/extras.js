@@ -6,7 +6,11 @@
     {id:"vault",name:"Llave correcta",hint:"Abre la caja fuerte"},
     {id:"doors",name:"Tres caminos",hint:"Abre las tres puertas"},
     {id:"mood",name:"Para cada momento",hint:"Elige un estado de ánimo"},
-    {id:"explorer",name:"Exploradora",hint:"Desbloquea el archivo secreto"}
+    {id:"explorer",name:"Exploradora",hint:"Desbloquea el archivo secreto"},
+    {id:"puzzle",name:"Pieza a pieza",hint:"Completa el puzzle"},
+    {id:"bingo",name:"Lista completa",hint:"Completa el bingo"},
+    {id:"credits",name:"Hasta los créditos",hint:"Reproduce los créditos finales"},
+    {id:"forbidden",name:"No sabes obedecer",hint:"Pulsa lo que no debías"}
   ];
 
   const DAILY = [
@@ -53,7 +57,7 @@
     const item=ACHIEVEMENTS.find(x=>x.id===id);
     if(!item) return;
     state.achievements.push(id); save(); renderProgress(); notify(item.name);
-    if(state.achievements.length>=5 && !has("explorer")){
+    if(state.achievements.length>=7 && !has("explorer")){
       state.achievements.push("explorer"); save(); renderProgress(); notify("Archivo secreto desbloqueado");
     }
   }
@@ -83,9 +87,9 @@
     const archiveBtn=document.getElementById("archiveButton");
     const archiveStatus=document.getElementById("archiveStatus");
     if(archiveBtn){
-      const ok=state.achievements.length>=5;
+      const ok=state.achievements.length>=7;
       archiveBtn.disabled=!ok;
-      archiveBtn.textContent=ok?"Abrir archivo":"Necesitas 5 logros";
+      archiveBtn.textContent=ok?"Abrir archivo":"Necesitas 7 logros";
       archiveStatus.textContent=ok?"Disponible":"Bloqueado";
     }
   }
@@ -200,7 +204,7 @@
 
   // Secret archive
   document.getElementById("archiveButton").addEventListener("click",()=>{
-    if(state.achievements.length<5)return;
+    if(state.achievements.length<7)return;
     document.getElementById("archiveContent").classList.remove("hidden");
     document.getElementById("archiveLock").classList.add("hidden");
     unlock("explorer");
@@ -210,5 +214,8 @@
   document.querySelectorAll(".open-when").forEach(x=>x.addEventListener("click",()=>{state.openedEnvelope=true;save();}));
   document.getElementById("spinPlan").addEventListener("click",()=>{state.usedWheel=true;save();});
 
+  window.mirandaUnlock = unlock;
+  window.mirandaRenderProgress = renderProgress;
+  window.mirandaExplorationState = state;
   renderProgress();
 })();
