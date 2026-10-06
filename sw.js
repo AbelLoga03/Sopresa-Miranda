@@ -1,4 +1,4 @@
-const CACHE="miranda-v3";
+const CACHE="miranda-v4";
 const ASSETS=[
   "./","./index.html","./archivo.html","./404.html","./manifest.json",
   "./css/style.css","./css/extras.css","./css/special.css",
