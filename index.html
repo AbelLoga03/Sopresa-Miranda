@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="css/extras.css">
   <link rel="stylesheet" href="css/special.css">
   <link rel="stylesheet" href="css/ultimate.css">
+  <link rel="stylesheet" href="css/planner.css">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 </head>
@@ -191,13 +192,65 @@
 
     <section class="scene" data-title="Ruleta de planes" data-scene-id="plans">
       <div class="section-heading"><span class="chapter-number">09</span><div><p class="kicker">Por si algún día falta una idea</p><h2>Ruleta de planes</h2></div></div>
-      <div class="plan-stage">
+
+      <div class="plan-stage planner-stage">
         <div class="wheel" id="planWheel" aria-hidden="true"><span>✦</span></div>
+        <span class="plan-category" id="planCategory">Plan sorpresa</span>
         <p class="plan-result" id="planResult">Pulsa el botón y deja que el azar elija.</p>
         <button class="primary" id="spinPlan" type="button">Elegir un plan</button>
+
+        <div class="plan-actions hidden" id="planActions">
+          <button class="secondary" id="savePlanLater" type="button">♡ Guardar para más adelante</button>
+          <button class="secondary" id="schedulePlan" type="button">▣ Elegir fecha</button>
+        </div>
       </div>
-      <div class="actions"><button class="secondary prev" type="button">← Volver</button><button class="primary next" type="button">Ir a la carta <span>→</span></button></div>
+
+      <div class="custom-plan-card">
+        <div>
+          <p class="kicker">¿Ya tienes una idea?</p>
+          <strong>Añadir un plan propio</strong>
+        </div>
+        <div class="custom-plan-row">
+          <input id="customPlanInput" type="text" maxlength="90" placeholder="Ej: merienda + paseo al atardecer">
+          <button class="secondary" id="customPlanAdd" type="button">Guardar idea</button>
+        </div>
+      </div>
+
+      <div class="saved-plans">
+        <div class="saved-plans-head">
+          <div><p class="kicker">Nuestra lista</p><h3>Planes guardados</h3></div>
+          <div class="plan-tabs" role="tablist" aria-label="Filtrar planes">
+            <button class="active" type="button" data-plan-filter="all">Todos</button>
+            <button type="button" data-plan-filter="later">Pendientes</button>
+            <button type="button" data-plan-filter="scheduled">Con fecha</button>
+          </div>
+        </div>
+        <div class="saved-plan-list" id="savedPlanList">
+          <div class="empty-plans">Todavía no hay planes guardados. Gira la ruleta y guarda alguno que os guste ✦</div>
+        </div>
+      </div>
+
+      <div class="actions"><button class="secondary prev" type="button">← Volver</button><button class="primary next" type="button">Seguir <span>→</span></button></div>
     </section>
+
+    <div class="plan-modal hidden" id="planModal" role="dialog" aria-modal="true" aria-labelledby="planModalTitle">
+      <div class="plan-modal-card">
+        <button class="plan-modal-close" id="planModalClose" type="button" aria-label="Cerrar">×</button>
+        <p class="kicker">Programar plan</p>
+        <h3 id="planModalTitle">Elegir una fecha</h3>
+        <p class="plan-modal-name" id="planModalName"></p>
+        <label for="planDate">Fecha</label>
+        <input id="planDate" type="date">
+        <label for="planTime">Hora <span>(opcional)</span></label>
+        <input id="planTime" type="time">
+        <label for="planNote">Nota <span>(opcional)</span></label>
+        <textarea id="planNote" rows="3" maxlength="160" placeholder="Ej: reservar antes, llevar cámara..."></textarea>
+        <div class="plan-modal-actions">
+          <button class="secondary" id="planSaveOnly" type="button">Guardar con fecha</button>
+          <button class="primary" id="planSaveCalendar" type="button">Guardar + calendario</button>
+        </div>
+      </div>
+    </div>
 
     <section class="scene" data-title="Zona secreta" data-scene-id="secrets">
       <div class="section-heading"><span class="chapter-number">10</span><div><p class="kicker">Zona secreta</p><h2>Hay cosas que no se enseñan a la primera</h2></div></div>
@@ -453,5 +506,6 @@
   <script src="js/extras.js?v=5"></script>
   <script src="js/special.js?v=5"></script>
   <script src="js/ultimate.js?v=1"></script>
+  <script src="js/planner.js?v=1"></script>
 </body>
 </html>
