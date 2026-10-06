@@ -32,12 +32,57 @@
     {id:"finale",title:"El capítulo 23",desc:"El último capítulo existe para comprobar si de verdad se exploró todo.",action:"Comprobar 23/23",fun:"El final sabe contar. Sorprendentemente, llegó hasta 23."}
   ];
 
-  const sceneMap=new Map([...document.querySelectorAll(".scene")].map(s=>[s.dataset.sceneId,s]));
+  const scenes=[...document.querySelectorAll(".scene")];
+  const sceneMap=new Map(scenes.map(s=>[s.dataset.sceneId,s]));
+  scenes.forEach((scene,index)=>{
+    if(!scene.dataset.originalTitle)scene.dataset.originalTitle=scene.dataset.title||("Capítulo "+(index+1));
+    scene.dataset.title=String(index+1).padStart(2,"0")+"/23 · "+scene.dataset.originalTitle;
+  });
+  const currentActive=scenes.findIndex(s=>s.classList.contains("active"));
+  const chapterLabelNow=document.getElementById("chapterLabel");
+  if(chapterLabelNow && currentActive>=0)chapterLabelNow.textContent=scenes[currentActive].dataset.title;
+
+  const intro=sceneMap.get("intro");
+  if(intro && !intro.querySelector(".edition-23")){
+    const edition=document.createElement("div");
+    edition.className="edition-23";
+    edition.innerHTML='<span>EDICIÓN</span><strong>23</strong><small>23 años · 23 capítulos</small>';
+    const kicker=intro.querySelector(".kicker");
+    kicker?.insertAdjacentElement("afterend",edition);
+  }
+
   const stepCounter=document.getElementById("stepCounter");
   const collection=document.createElement("span");
   collection.className="chapter-collection";
   collection.innerHTML='Detalles <strong id="chapterCollectCount">0 / 23</strong>';
   stepCounter?.insertAdjacentElement("afterend",collection);
+
+  const indexToggle=document.createElement("button");
+  indexToggle.type="button";
+  indexToggle.className="chapter-index-toggle";
+  indexToggle.textContent="Índice 23";
+  collection.insertAdjacentElement("afterend",indexToggle);
+
+  const indexPanel=document.createElement("div");
+  indexPanel.className="chapter-index-panel hidden";
+  indexPanel.innerHTML='<div class="chapter-index-card"><div class="chapter-index-head"><div><small>23 años · 23 capítulos</small><strong>Índice de la experiencia</strong></div><button type="button" aria-label="Cerrar">×</button></div><div class="chapter-index-grid"></div></div>';
+  document.body.appendChild(indexPanel);
+  const indexGrid=indexPanel.querySelector(".chapter-index-grid");
+  scenes.forEach((scene,index)=>{
+    const b=document.createElement("button");
+    b.type="button";
+    b.dataset.index=String(index);
+    b.dataset.sceneId=scene.dataset.sceneId||"";
+    b.innerHTML='<span>'+String(index+1).padStart(2,"0")+'</span><strong>'+scene.dataset.originalTitle+'</strong><small>Detalle pendiente</small>';
+    b.addEventListener("click",()=>{
+      window.mirandaShowScene?.(index);
+      indexPanel.classList.add("hidden");
+    });
+    indexGrid.appendChild(b);
+  });
+  indexToggle.addEventListener("click",()=>indexPanel.classList.toggle("hidden"));
+  indexPanel.querySelector(".chapter-index-head button").addEventListener("click",()=>indexPanel.classList.add("hidden"));
+  indexPanel.addEventListener("click",e=>{if(e.target===indexPanel)indexPanel.classList.add("hidden");});
 
   function updateCount(){
     const el=document.getElementById("chapterCollectCount");
@@ -46,6 +91,12 @@
       card.classList.toggle("discovered",state.found.includes(card.dataset.chapterId));
       const b=card.querySelector(".chapter-discover");
       if(b)b.textContent=state.found.includes(card.dataset.chapterId)?"✓ Detalle descubierto":"✦ Descubrir detalle";
+    });
+    document.querySelectorAll(".chapter-index-grid button").forEach(b=>{
+      const done=state.found.includes(b.dataset.sceneId);
+      b.classList.toggle("done",done);
+      const small=b.querySelector("small");
+      if(small)small.textContent=done?"✓ Detalle descubierto":"Detalle pendiente";
     });
     renderFinal23();
   }
