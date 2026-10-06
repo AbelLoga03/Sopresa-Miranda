@@ -11,6 +11,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/extras.css">
+  <link rel="stylesheet" href="css/special.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 </head>
 <body>
   <div class="ambient ambient-one"></div>
@@ -35,12 +38,18 @@
     <div class="badge-grid" id="badgeGrid"></div>
   </aside>
 
+  <div class="birthday-banner hidden" id="birthdayBanner" aria-live="polite">
+    <span>✦</span><strong>17 de mayo · Modo cumpleaños activado</strong><span>✦</span>
+  </div>
+
+  <button class="do-not-press" id="doNotPress" type="button">NO PULSES</button>
+
   <main class="experience" id="experience">
     <div class="topbar">
       <span class="eyebrow" id="chapterLabel">Una pequeña sorpresa</span>
       <div class="progress-wrap" aria-label="Progreso">
         <div class="progress-track"><span id="progressBar"></span></div>
-        <span id="stepCounter">1 / 15</span>
+        <span id="stepCounter">1 / 18</span>
       </div>
     </div>
 
@@ -252,8 +261,66 @@
         <h3>Esto no aparecía en el recorrido normal</h3>
         <p>Aquí pondremos una fotografía especialmente importante, una broma interna y un mensaje extra. Solo se abrirá después de explorar suficiente la página.</p>
         <div class="archive-placeholder">✦ &nbsp; FOTO / RECUERDO SECRETO &nbsp; ✦</div>
+        <a class="archive-link" href="archivo.html">Entrar en la segunda página secreta →</a>
       </div>
 
+      <div class="actions"><button class="secondary prev" type="button">← Volver</button><button class="primary next" type="button">Ir a la carta <span>→</span></button></div>
+    </section>
+
+    <section class="scene" data-title="Puzzle secreto" data-scene-id="puzzle">
+      <div class="section-heading"><span class="chapter-number">13</span><div><p class="kicker">Una pieza cada vez</p><h2>Puzzle secreto</h2></div></div>
+      <p class="helper">En la versión final este puzzle puede usar una foto vuestra. De momento tiene un diseño de prueba: ordena las piezas del 1 al 8.</p>
+      <div class="puzzle-wrap">
+        <div class="puzzle-board" id="puzzleBoard" aria-label="Puzzle deslizante"></div>
+        <div class="puzzle-side">
+          <span class="puzzle-medal">◇</span>
+          <h3 id="puzzleTitle">Una imagen por descubrir</h3>
+          <p id="puzzleStatus">Mueve las piezas hasta dejarlas en orden.</p>
+          <button class="secondary" id="shufflePuzzle" type="button">Mezclar de nuevo</button>
+        </div>
+      </div>
+      <div class="actions"><button class="secondary prev" type="button">← Volver</button><button class="primary next" type="button">Ver el bingo <span>→</span></button></div>
+    </section>
+
+    <section class="scene" data-title="Bingo de planes" data-scene-id="bingo">
+      <div class="section-heading"><span class="chapter-number">14</span><div><p class="kicker">Para ir completando</p><h2>Bingo de recuerdos futuros</h2></div></div>
+      <p class="helper">Marca los planes que ya hayáis hecho o los que quieras convertir en realidad. Se guardan en este navegador.</p>
+      <div class="bingo-grid" id="bingoGrid">
+        <button type="button">Ver un amanecer</button>
+        <button type="button">Cocinar algo nuevo</button>
+        <button type="button">Hacer una escapada</button>
+        <button type="button">Noche de película</button>
+        <button type="button" class="bingo-center">✦ NOSOTROS ✦</button>
+        <button type="button">Descubrir un sitio</button>
+        <button type="button">Hacernos fotos</button>
+        <button type="button">Plan improvisado</button>
+        <button type="button">Cumplir una locura pendiente</button>
+      </div>
+      <div class="reveal-box" id="bingoStatus">0 de 9 casillas marcadas.</div>
+      <div class="actions"><button class="secondary prev" type="button">← Volver</button><button class="primary next" type="button">Nuestra película <span>→</span></button></div>
+    </section>
+
+    <section class="scene" data-title="Nuestra película" data-scene-id="cinema">
+      <div class="section-heading"><span class="chapter-number">15</span><div><p class="kicker">Una historia en pantalla</p><h2>Nuestra película</h2></div></div>
+      <div class="movie-ticket">
+        <span class="ticket-hole left"></span><span class="ticket-hole right"></span>
+        <small>EDICIÓN ESPECIAL · 17 MAYO</small>
+        <strong>Miranda — La historia continúa</strong>
+        <p>Una producción hecha de recuerdos, planes y muchas escenas que todavía no se han grabado.</p>
+      </div>
+      <div class="credits-stage" id="creditsStage">
+        <div class="credits-roll" id="creditsRoll">
+          <p class="credits-small">UNA PEQUEÑA PRODUCCIÓN</p>
+          <h3>Para Miranda</h3>
+          <p>PROTAGONISTA<br><strong>Miranda</strong></p>
+          <p>RECUERDOS<br><strong>Los que ya existen</strong></p>
+          <p>LOCALIZACIONES<br><strong>Las que iremos añadiendo</strong></p>
+          <p>BANDA SONORA<br><strong>Pendiente de elegir</strong></p>
+          <p>PRÓXIMA TEMPORADA<br><strong>En construcción ✦</strong></p>
+          <p class="credits-end">CONTINUARÁ…</p>
+        </div>
+      </div>
+      <button class="secondary credits-button" id="playCredits" type="button">Reproducir créditos</button>
       <div class="actions"><button class="secondary prev" type="button">← Volver</button><button class="primary next" type="button">Ir a la carta <span>→</span></button></div>
     </section>
 
@@ -302,5 +369,6 @@
   <footer><span>Hecho para un día especial</span><span>✦</span></footer>
   <script src="js/app.js"></script>
   <script src="js/extras.js"></script>
+  <script src="js/special.js"></script>
 </body>
 </html>
