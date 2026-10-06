@@ -99,3 +99,17 @@ La ruleta incluye ahora una colección amplia de ideas y permite:
 - Conservar los planes mediante `localStorage` en el navegador.
 
 Los planes guardados localmente no se sincronizan automáticamente entre dispositivos.
+
+
+## Concepto 23 años · 23 capítulos
+
+La experiencia conserva exactamente 23 escenas, una por cada año de Miranda.
+
+Cada capítulo incluye ahora:
+- Numeración propia del 01/23 al 23/23.
+- Un detalle adicional exclusivo.
+- Una mini interacción o broma distinta.
+- Un coleccionable persistente.
+- Acceso desde un índice navegable de 23 capítulos.
+
+Al descubrir el detalle de los 23 capítulos se activa una celebración 23/23 y el final muestra una tarjeta especial de recorrido completo.
