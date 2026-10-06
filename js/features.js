@@ -90,7 +90,7 @@
 
   const PROGRESS_KEYS=[
     "miranda-exploration-v1","miranda-special-v1","miranda-ultimate-v1","miranda-force-birthday",
-    "miranda-plans-v1","miranda-23-details-v1","miranda-microdetails-v1","miranda-features-v1"
+    "miranda-plans-v1","miranda-23-details-v1","miranda-microdetails-v1","miranda-features-v1","miranda-hints-v1"
   ];
   document.getElementById("exportProgress").addEventListener("click",()=>{
     const values={};
@@ -194,6 +194,7 @@
     const plans=parse("miranda-plans-v1",{plans:[]});
     const special=parse("miranda-special-v1",{bingo:[]});
     const ultimate=parse("miranda-ultimate-v1",{visits:0});
+    const hints=parse("miranda-hints-v1",{used:0});
     const achievements=Array.isArray(exploration.achievements)?exploration.achievements.length:0;
     const details=Array.isArray(chapters.found)?chapters.found.length:0;
     const visited=Array.isArray(micro.visited)?micro.visited.length:0;
@@ -202,7 +203,7 @@
     const donePlans=planList.filter(p=>p.status==="done").length;
     const scheduled=planList.filter(p=>p.status==="scheduled").length;
     const bingo=Array.isArray(special.bingo)?special.bingo.length:0;
-    return {achievements,details,visited,tokens,plans:planList.length,donePlans,scheduled,bingo,visits:Number(ultimate.visits)||0,favorites:state.favorites.length,days:state.days.length,rare:state.rareSeen,cinema:state.cinemaRuns};
+    return {achievements,details,visited,tokens,plans:planList.length,donePlans,scheduled,bingo,visits:Number(ultimate.visits)||0,favorites:state.favorites.length,days:state.days.length,rare:state.rareSeen,cinema:state.cinemaRuns,hints:Number(hints.used)||0};
   }
   const finale=document.querySelector('[data-scene-id="finale"] #finalContent');
   const statsBox=document.createElement("div");statsBox.className="final-stats";statsBox.id="finalStats";
@@ -220,7 +221,8 @@
         '<div class="final-stat"><strong>'+s.tokens+'</strong><small>mini secretos</small></div>'+
         '<div class="final-stat"><strong>'+s.scheduled+'</strong><small>planes con fecha</small></div>'+
         '<div class="final-stat"><strong>'+s.donePlans+'</strong><small>planes realizados</small></div>'+
-      '</div><div class="final-stats-line">'+scoreParts.join(" · ")+'<br><b>'+s.rare+'</b> evento(s) raro(s) encontrado(s) · <b>'+s.cinema+'</b> reproducción(es) en modo cine.</div>';
+        '<div class="final-stat"><strong>'+s.hints+'</strong><small>pistas utilizadas</small></div>'+
+      '</div><div class="final-stats-line">'+scoreParts.join(" · ")+'<br><b>'+s.rare+'</b> evento(s) raro(s) encontrado(s) · <b>'+s.cinema+'</b> reproducción(es) en modo cine · <b>'+s.hints+'</b> pista(s) consultada(s).</div>';
   }
   renderStats();
   if(finale)new MutationObserver(renderStats).observe(finale,{attributes:true,attributeFilter:["class"]});
