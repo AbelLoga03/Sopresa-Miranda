@@ -10,7 +10,12 @@
     {id:"puzzle",name:"Pieza a pieza",hint:"Completa el puzzle"},
     {id:"bingo",name:"Lista completa",hint:"Completa el bingo"},
     {id:"credits",name:"Hasta los créditos",hint:"Reproduce los créditos finales"},
-    {id:"forbidden",name:"No sabes obedecer",hint:"Pulsa lo que no debías"}
+    {id:"forbidden",name:"No sabes obedecer",hint:"Pulsa lo que no debías"},
+    {id:"choice",name:"Un camino propio",hint:"Elige un camino"},
+    {id:"timetravel",name:"Viajera del tiempo",hint:"Explora todas las épocas"},
+    {id:"capsule",name:"Fuera del tiempo",hint:"Abre una cápsula especial"},
+    {id:"memorygame",name:"Memoria perfecta",hint:"Completa el juego de parejas"},
+    {id:"compare",name:"Antes y ahora",hint:"Explora los dos extremos de la comparación"}
   ];
 
   const DAILY = [
@@ -87,6 +92,18 @@
       div.innerHTML="<strong>"+a.name+"</strong>"+(has(a.id)?"Descubierto":a.hint);
       grid.appendChild(div);
     });
+    const historyBox=document.getElementById("achievementHistory");
+    if(historyBox){
+      const items=(state.history||[]).slice(-5).reverse();
+      historyBox.innerHTML=items.length
+        ? '<span class="history-title">Últimos logros</span>'+items.map(h=>{
+            const d=new Date(h.at);
+            const when=Number.isNaN(d.getTime())?'':d.toLocaleString('es-ES',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+            return '<div class="history-item"><strong>'+h.name+'</strong><small>'+when+'</small></div>';
+          }).join('')
+        : '<span class="history-title">Los logros que encuentre aparecerán aquí.</span>';
+    }
+
     const archiveBtn=document.getElementById("archiveButton");
     const archiveStatus=document.getElementById("archiveStatus");
     if(archiveBtn){
@@ -220,5 +237,6 @@
   window.mirandaUnlock = unlock;
   window.mirandaRenderProgress = renderProgress;
   window.mirandaExplorationState = state;
+  window.mirandaAchievementIds = ACHIEVEMENTS.map(a=>a.id);
   renderProgress();
 })();
