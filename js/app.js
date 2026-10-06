@@ -188,9 +188,11 @@
   function updateCountdown() {
     const message = document.getElementById("countdownMessage");
     const now = new Date();
-    const isBirthday =
+    const forcedBirthday = localStorage.getItem("miranda-force-birthday") === "1";
+    const isBirthday = forcedBirthday || (
       now.getMonth() === CONFIG.birthdayMonth - 1 &&
-      now.getDate() === CONFIG.birthdayDay;
+      now.getDate() === CONFIG.birthdayDay
+    );
 
     if (isBirthday) {
       document.getElementById("days").textContent = "0";
@@ -270,5 +272,7 @@
     } catch { soundToggle.setAttribute("aria-pressed","false"); }
   });
 
+  window.mirandaShowScene = showScene;
+  window.mirandaScenes = scenes;
   showScene(0);
 })();
