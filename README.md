@@ -113,3 +113,18 @@ Cada capítulo incluye ahora:
 - Acceso desde un índice navegable de 23 capítulos.
 
 Al descubrir el detalle de los 23 capítulos se activa una celebración 23/23 y el final muestra una tarjeta especial de recorrido completo.
+
+
+## Favoritos, modo cine, estadísticas y copias
+
+La experiencia mantiene exactamente 23 capítulos y añade:
+
+- Favoritos por capítulo con acceso directo.
+- Modo cine automático que recorre los 23 capítulos.
+- Eventos raros con probabilidad 1/23 al cambiar de capítulo.
+- Estadísticas finales de capítulos, logros, secretos, favoritos y planes.
+- Exportación del progreso a un archivo JSON.
+- Restauración del progreso desde una copia anterior.
+- Reinicio DEV ampliado para borrar también favoritos, planes y microsecretos.
+
+Los favoritos y el progreso se almacenan localmente en el navegador.
