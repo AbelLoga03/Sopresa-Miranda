@@ -1,5 +1,5 @@
 (() => {
-  const scene=document.querySelector('.scene[data-scene-id="constellation"]');
+  const sprite=(window.MIRANDA_SPRITE_PARTS||[]).join("");\n  if(sprite){document.documentElement.style.setProperty("--miranda-photo-sprite",`url("data:image/webp;base64,${sprite}")`);}\n  const scene=document.querySelector('.scene[data-scene-id="constellation"]');
   const gallery=document.querySelector('.scene[data-scene-id="gallery"]');
   if(!scene||!gallery)return;
 
