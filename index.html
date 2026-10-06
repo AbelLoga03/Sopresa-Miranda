@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/extras.css">
 </head>
 <body>
   <div class="ambient ambient-one"></div>
@@ -20,12 +21,26 @@
     <span aria-hidden="true">♪</span><span class="sound-label">Ambiente</span>
   </button>
 
+  <button class="explore-toggle" id="exploreToggle" type="button" aria-expanded="false" aria-controls="explorePanel">
+    <span>✦</span><span id="exploreCounter">0 / 7</span>
+  </button>
+
+  <aside class="explore-panel hidden" id="explorePanel" aria-label="Progreso de exploración">
+    <div class="explore-head">
+      <div><span class="kicker">Exploración</span><strong>Archivo secreto</strong></div>
+      <button id="exploreClose" type="button" aria-label="Cerrar">×</button>
+    </div>
+    <div class="secret-progress"><span id="secretProgressBar"></span></div>
+    <p id="secretProgressText">Encuentra secretos y completa pequeñas misiones.</p>
+    <div class="badge-grid" id="badgeGrid"></div>
+  </aside>
+
   <main class="experience" id="experience">
     <div class="topbar">
       <span class="eyebrow" id="chapterLabel">Una pequeña sorpresa</span>
       <div class="progress-wrap" aria-label="Progreso">
         <div class="progress-track"><span id="progressBar"></span></div>
-        <span id="stepCounter">1 / 12</span>
+        <span id="stepCounter">1 / 15</span>
       </div>
     </div>
 
@@ -161,6 +176,87 @@
       <div class="actions"><button class="secondary prev" type="button">← Volver</button><button class="primary next" type="button">Ir a la carta <span>→</span></button></div>
     </section>
 
+    <section class="scene" data-title="Zona secreta" data-scene-id="secrets">
+      <div class="section-heading"><span class="chapter-number">10</span><div><p class="kicker">Zona secreta</p><h2>Hay cosas que no se enseñan a la primera</h2></div></div>
+
+      <div class="daily-card">
+        <span class="daily-icon">☼</span>
+        <div>
+          <small id="timeGreeting">Un detalle para este momento</small>
+          <strong id="dailyMemory">Cargando recuerdo del día…</strong>
+        </div>
+      </div>
+
+      <div class="secret-tools">
+        <article class="scratch-card">
+          <div>
+            <p class="kicker">Rasca y descubre</p>
+            <h3>Hay algo debajo</h3>
+            <p class="helper">Pasa el dedo o el ratón por la tarjeta.</p>
+          </div>
+          <div class="scratch-stage" id="scratchStage">
+            <div class="scratch-prize"><span>♡</span><strong>Mensaje secreto</strong><small>Aquí irá una frase o fotografía especial.</small></div>
+            <canvas id="scratchCanvas" aria-label="Tarjeta para rascar"></canvas>
+          </div>
+          <button class="secondary" id="scratchReveal" type="button">Revelar sin rascar</button>
+        </article>
+
+        <article class="vault-card">
+          <p class="kicker">Caja fuerte</p>
+          <h3>Solo para quien conozca la respuesta</h3>
+          <label for="vaultInput">¿Para quién está hecha esta página?</label>
+          <div class="vault-row">
+            <input id="vaultInput" type="text" autocomplete="off" placeholder="Escribe la respuesta">
+            <button class="primary" id="vaultButton" type="button">Abrir</button>
+          </div>
+          <p class="vault-result" id="vaultResult" aria-live="polite">Pista: el nombre aparece más de una vez en la web.</p>
+        </article>
+      </div>
+
+      <div class="actions"><button class="secondary prev" type="button">← Volver</button><button class="primary next" type="button">Elegir una puerta <span>→</span></button></div>
+    </section>
+
+    <section class="scene" data-title="Elige una puerta" data-scene-id="doors">
+      <div class="section-heading"><span class="chapter-number">11</span><div><p class="kicker">Tres caminos</p><h2>Elige una puerta</h2></div></div>
+      <p class="helper">Las tres se pueden abrir, pero cada una guarda una idea diferente.</p>
+      <div class="door-grid">
+        <button class="door-card" type="button" data-door="Un recuerdo especial puede aparecer aquí con una foto sorpresa."><span class="door-number">I</span><span class="door-shape">⌂</span><strong>Pasado</strong><small>Un recuerdo</small></button>
+        <button class="door-card" type="button" data-door="Aquí puede esconderse una frase que quieras decirle hoy."><span class="door-number">II</span><span class="door-shape">⌂</span><strong>Presente</strong><small>Un mensaje</small></button>
+        <button class="door-card" type="button" data-door="Esta puerta puede revelar un plan, viaje o sueño que quieras compartir."><span class="door-number">III</span><span class="door-shape">⌂</span><strong>Futuro</strong><small>Una aventura</small></button>
+      </div>
+      <div class="reveal-box" id="doorReveal">Elige una de las tres puertas.</div>
+      <div class="actions"><button class="secondary prev" type="button">← Volver</button><button class="primary next" type="button">¿Cómo estás hoy? <span>→</span></button></div>
+    </section>
+
+    <section class="scene" data-title="Para cada momento" data-scene-id="mood">
+      <div class="section-heading"><span class="chapter-number">12</span><div><p class="kicker">Para cada momento</p><h2>¿Cómo estás hoy?</h2></div></div>
+      <div class="mood-grid">
+        <button class="mood-card" type="button" data-mood="happy"><span>☀</span><strong>Feliz</strong></button>
+        <button class="mood-card" type="button" data-mood="tired"><span>☾</span><strong>Cansada</strong></button>
+        <button class="mood-card" type="button" data-mood="bored"><span>✦</span><strong>Aburrida</strong></button>
+        <button class="mood-card" type="button" data-mood="blue"><span>☁</span><strong>Día gris</strong></button>
+      </div>
+      <div class="mood-message" id="moodMessage">
+        <span>♡</span>
+        <p>Elige cómo te sientes y aquí aparecerá un mensaje, una foto o un plan pensado para ese momento.</p>
+      </div>
+
+      <div class="archive-lock" id="archiveLock">
+        <span class="archive-icon">◇</span>
+        <div><small>Archivo secreto de Miranda</small><strong id="archiveStatus">Bloqueado</strong></div>
+        <button class="secondary" id="archiveButton" type="button" disabled>Necesitas 5 logros</button>
+      </div>
+
+      <div class="archive-content hidden" id="archiveContent">
+        <p class="kicker">Archivo secreto desbloqueado</p>
+        <h3>Esto no aparecía en el recorrido normal</h3>
+        <p>Aquí pondremos una fotografía especialmente importante, una broma interna y un mensaje extra. Solo se abrirá después de explorar suficiente la página.</p>
+        <div class="archive-placeholder">✦ &nbsp; FOTO / RECUERDO SECRETO &nbsp; ✦</div>
+      </div>
+
+      <div class="actions"><button class="secondary prev" type="button">← Volver</button><button class="primary next" type="button">Ir a la carta <span>→</span></button></div>
+    </section>
+
     <section class="scene" data-title="La carta" data-scene-id="letter">
       <div class="letter-stage">
         <p class="kicker">Capítulo final</p>
@@ -205,5 +301,6 @@
 
   <footer><span>Hecho para un día especial</span><span>✦</span></footer>
   <script src="js/app.js"></script>
+  <script src="js/extras.js"></script>
 </body>
 </html>
