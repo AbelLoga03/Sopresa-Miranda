@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/extras.css">
   <link rel="stylesheet" href="css/special.css">
+  <link rel="stylesheet" href="css/ultimate.css">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 </head>
@@ -36,6 +37,7 @@
     <div class="secret-progress"><span id="secretProgressBar"></span></div>
     <p id="secretProgressText">Encuentra secretos y completa pequeñas misiones.</p>
     <div class="badge-grid" id="badgeGrid"></div>
+    <div class="achievement-history" id="achievementHistory"></div>
   </aside>
 
   <div class="birthday-banner hidden" id="birthdayBanner" aria-live="polite">
@@ -44,13 +46,24 @@
 
   <button class="do-not-press" id="doNotPress" type="button">NO PULSES</button>
   <button class="install-app hidden" id="installApp" type="button">＋ Añadir al móvil</button>
+  <button class="dev-toggle hidden" id="devToggle" type="button">⚙ DEV</button>
+  <aside class="dev-panel hidden" id="devPanel">
+    <div class="dev-head"><strong>Panel de pruebas</strong><button id="devClose" type="button">×</button></div>
+    <p>Solo aparece al abrir la web con <code>?dev=1</code>.</p>
+    <div class="dev-grid">
+      <button id="devBirthday" type="button">Simular cumpleaños</button>
+      <button id="devUnlock" type="button">Desbloquear logros</button>
+      <button id="devFinal" type="button">Saltar al final</button>
+      <button id="devReset" type="button">Reiniciar progreso</button>
+    </div>
+  </aside>
 
   <main class="experience" id="experience">
     <div class="topbar">
       <span class="eyebrow" id="chapterLabel">Una pequeña sorpresa</span>
       <div class="progress-wrap" aria-label="Progreso">
         <div class="progress-track"><span id="progressBar"></span></div>
-        <span id="stepCounter">1 / 18</span>
+        <span id="stepCounter">1 / 23</span>
       </div>
     </div>
 
@@ -325,6 +338,68 @@
       <div class="actions"><button class="secondary prev" type="button">← Volver</button><button class="primary next" type="button">Ir a la carta <span>→</span></button></div>
     </section>
 
+    <section class="scene" data-title="Elige el camino" data-scene-id="choices">
+      <div class="section-heading"><span class="chapter-number">16</span><div><p class="kicker">Pequeñas decisiones</p><h2>¿Qué capítulo abrirías ahora?</h2></div></div>
+      <p class="helper">La elección cambia el mensaje y quedará guardada como parte del recorrido.</p>
+      <div class="choice-grid">
+        <button class="choice-card" type="button" data-choice="past"><span>◌</span><strong>Volver a un recuerdo</strong><small>Algo que ya pasó</small></button>
+        <button class="choice-card" type="button" data-choice="present"><span>♡</span><strong>Quedarnos aquí</strong><small>Disfrutar del presente</small></button>
+        <button class="choice-card" type="button" data-choice="future"><span>✦</span><strong>Mirar hacia delante</strong><small>Algo que aún no existe</small></button>
+      </div>
+      <div class="choice-result" id="choiceResult">Todavía no has elegido un camino.</div>
+      <div class="actions"><button class="secondary prev" type="button">← Volver</button><button class="primary next" type="button">Máquina del tiempo <span>→</span></button></div>
+    </section>
+
+    <section class="scene" data-title="Máquina del tiempo" data-scene-id="timemachine">
+      <div class="section-heading"><span class="chapter-number">17</span><div><p class="kicker">Viaje rápido</p><h2>Máquina del tiempo</h2></div></div>
+      <p class="helper">Cuando añadamos recuerdos reales, cada etapa tendrá fotos y textos propios.</p>
+      <div class="time-machine">
+        <div class="time-dial" id="timeDial"><span>✦</span></div>
+        <div class="time-controls">
+          <button type="button" data-era="beginning">El comienzo</button>
+          <button type="button" data-era="moments">Los momentos</button>
+          <button type="button" data-era="today">Hoy</button>
+          <button type="button" data-era="future">El futuro</button>
+        </div>
+        <div class="time-output" id="timeOutput">Selecciona una etapa.</div>
+      </div>
+      <div class="actions"><button class="secondary prev" type="button">← Volver</button><button class="primary next" type="button">Cápsulas <span>→</span></button></div>
+    </section>
+
+    <section class="scene" data-title="Cápsulas en el tiempo" data-scene-id="capsules">
+      <div class="section-heading"><span class="chapter-number">18</span><div><p class="kicker">No todo se abre hoy</p><h2>Cápsulas en el tiempo</h2></div></div>
+      <p class="helper">Algunas sorpresas pueden depender de la fecha o del progreso.</p>
+      <div class="capsule-grid">
+        <button class="capsule-card" id="birthdayCapsule" type="button"><span class="capsule-lock">◇</span><small>17 de mayo</small><strong>Cápsula de cumpleaños</strong><em id="birthdayCapsuleStatus">Bloqueada</em></button>
+        <button class="capsule-card" id="nightCapsule" type="button"><span class="capsule-lock">☾</span><small>Después de las 21:00</small><strong>Cápsula nocturna</strong><em id="nightCapsuleStatus">Bloqueada</em></button>
+        <button class="capsule-card" id="achievementCapsule" type="button"><span class="capsule-lock">✦</span><small>Exploración</small><strong>Cápsula de logros</strong><em id="achievementCapsuleStatus">Bloqueada</em></button>
+      </div>
+      <div class="reveal-box" id="capsuleReveal">Las cápsulas se abrirán cuando se cumpla su condición.</div>
+      <div class="actions"><button class="secondary prev" type="button">← Volver</button><button class="primary next" type="button">Juego de memoria <span>→</span></button></div>
+    </section>
+
+    <section class="scene" data-title="Juego de memoria" data-scene-id="memorygame">
+      <div class="section-heading"><span class="chapter-number">19</span><div><p class="kicker">Encuentra las parejas</p><h2>Memoria de recuerdos</h2></div></div>
+      <p class="helper">Más adelante estas cartas pueden ser miniaturas de fotos reales.</p>
+      <div class="memory-board" id="memoryBoard"></div>
+      <div class="memory-stats"><span id="memoryMoves">0 movimientos</span><span id="memoryPairs">0 / 4 parejas</span></div>
+      <button class="secondary memory-reset" id="memoryReset" type="button">Mezclar cartas</button>
+      <div class="actions"><button class="secondary prev" type="button">← Volver</button><button class="primary next" type="button">Antes y ahora <span>→</span></button></div>
+    </section>
+
+    <section class="scene" data-title="Antes y ahora" data-scene-id="beforeafter">
+      <div class="section-heading"><span class="chapter-number">20</span><div><p class="kicker">Dos momentos</p><h2>Antes y ahora</h2></div></div>
+      <p class="helper">Cuando tengamos dos fotos adecuadas, podrás deslizar para comparar dos etapas.</p>
+      <div class="compare-wrap" id="compareWrap">
+        <div class="compare-base"><span>AHORA</span><strong>Foto actual</strong></div>
+        <div class="compare-overlay" id="compareOverlay"><span>ANTES</span><strong>Foto anterior</strong></div>
+        <input id="compareSlider" type="range" min="0" max="100" value="50" aria-label="Comparar antes y ahora">
+        <div class="compare-line" id="compareLine"></div>
+      </div>
+      <div class="reveal-box">En la versión final podemos buscar dos fotos con encuadres parecidos para que el efecto quede espectacular.</div>
+      <div class="actions"><button class="secondary prev" type="button">← Volver</button><button class="primary next" type="button">Ir a la carta <span>→</span></button></div>
+    </section>
+
     <section class="scene" data-title="La carta" data-scene-id="letter">
       <div class="letter-stage">
         <p class="kicker">Capítulo final</p>
@@ -352,6 +427,12 @@
         <p class="lead">Aquí aparecerá el regalo real, una cena, una escapada, una experiencia o el último mensaje de la historia.</p>
         <div class="gift-card"><span>🎁</span><div><small>Sorpresa final</small><strong>Próximamente…</strong></div></div>
         <div class="completion" id="completionMessage">Has llegado hasta el final.</div>
+        <div class="legendary-ending hidden" id="legendaryEnding">
+          <span>✦</span>
+          <small>FINAL SECRETO</small>
+          <strong>Has descubierto absolutamente todo.</strong>
+          <p>Este final solo aparece al completar todos los logros. Aquí pondremos el mensaje más escondido de toda la página.</p>
+        </div>
         <button class="secondary" id="restartButton" type="button">Volver al principio</button>
       </div>
     </section>
@@ -371,5 +452,6 @@
   <script src="js/app.js?v=5"></script>
   <script src="js/extras.js?v=5"></script>
   <script src="js/special.js?v=5"></script>
+  <script src="js/ultimate.js?v=1"></script>
 </body>
 </html>
