@@ -11,14 +11,56 @@
       "Un momento que todavía quieras vivir juntos."
     ],
     plans: [
-      "Cena especial",
-      "Peli + algo rico",
-      "Paseo sin prisa",
-      "Escapada improvisada",
+      "Cena en un sitio nuevo",
+      "Peli + algo rico en casa",
+      "Paseo al atardecer",
+      "Escapada de un día",
       "Tarde de fotos",
-      "Plan sorpresa",
-      "Cocinar algo juntos",
-      "Elegir un sitio nuevo"
+      "Picnic improvisado",
+      "Cocinar una receta nueva",
+      "Descubrir una cafetería",
+      "Ir a ver el amanecer",
+      "Noche de juegos de mesa",
+      "Maratón de vuestra saga favorita",
+      "Probar un restaurante que nunca hayáis visitado",
+      "Tarde sin móviles",
+      "Ruta por un sitio bonito",
+      "Hacer una playlist juntos",
+      "Ir a por un helado y dar una vuelta",
+      "Visitar un pueblo cercano",
+      "Preparar una cena temática",
+      "Hacer un álbum con fotos",
+      "Elegir un plan al azar con una moneda",
+      "Tarde de videojuegos juntos",
+      "Hacer galletas o un postre",
+      "Ver las estrellas",
+      "Buscar un mirador nuevo",
+      "Ir a una feria o mercadillo",
+      "Desayuno especial",
+      "Cena de vuestro sitio favorito",
+      "Hacer una lista de próximos viajes",
+      "Sesión de fotos divertida",
+      "Ir a la playa al atardecer",
+      "Tarde de manta y película",
+      "Comprar ingredientes y cocinar sin receta",
+      "Hacer una excursión corta",
+      "Probar una comida nueva",
+      "Recrear vuestra primera cita",
+      "Elegir una película cada uno",
+      "Preparar una sorpresa de menos de 10 €",
+      "Ir a algún sitio sin decir el destino",
+      "Escribir una cápsula del tiempo",
+      "Hacer un ranking de vuestros recuerdos favoritos",
+      "Salir a cenar y elegir el sitio por sorteo",
+      "Día de turista en vuestra propia zona",
+      "Buscar una actividad que ninguno haya probado",
+      "Hacer una noche de preguntas y recuerdos",
+      "Crear una lista de 10 cosas pendientes juntos",
+      "Ver fotos antiguas y elegir las mejores",
+      "Ir a desayunar fuera",
+      "Preparar una merienda y buscar un sitio bonito",
+      "Dar una vuelta en coche con música",
+      "Plan completamente improvisado"
     ],
     quiz: [
       {
@@ -141,6 +183,8 @@
     wheelTurns += 720 + Math.floor(Math.random() * 360);
     document.getElementById("planWheel").style.transform = "rotate(" + wheelTurns + "deg)";
     document.getElementById("planResult").textContent = result;
+    window.mirandaCurrentPlan = result;
+    window.dispatchEvent(new CustomEvent("miranda-plan-picked", { detail: { plan: result } }));
   });
 
   const letterButton = document.getElementById("letterButton");
