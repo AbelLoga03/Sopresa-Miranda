@@ -217,5 +217,8 @@
   window.mirandaUnlock = unlock;
   window.mirandaRenderProgress = renderProgress;
   window.mirandaExplorationState = state;
+  window.mirandaUnlock = unlock;
+  window.mirandaRenderProgress = renderProgress;
+  window.mirandaExplorationState = state;
   renderProgress();
 })();
