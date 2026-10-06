@@ -47,3 +47,40 @@ Se puede añadir un archivo dentro de `audio/` y sustituir el ambiente generado 
 ## Publicación
 
 La web es estática y está preparada para GitHub Pages desde la rama `main`.
+
+
+## Edición Ultimate
+
+La experiencia incluye además:
+
+- 23 escenas interactivas.
+- 16 logros con progreso persistente.
+- Historial con fecha y hora de los últimos logros.
+- Decisiones que alteran el texto del final secreto.
+- Máquina del tiempo.
+- Cápsulas condicionadas por fecha, hora y progreso.
+- Juego de memoria.
+- Comparador “Antes / Ahora”.
+- Foto misteriosa que pierde desenfoque al conseguir logros.
+- Mensaje distinto para visitas repetidas.
+- Modo nocturno automático.
+- Final secreto al completar todos los logros.
+- Panel de pruebas para el autor.
+- Modo ensayo del cumpleaños.
+
+### Panel de pruebas
+
+Abre la web añadiendo `?dev=1` al final de la dirección.
+
+Ejemplo:
+
+`https://abelloga03.github.io/Sopresa-Miranda/?dev=1`
+
+El panel permite:
+
+- Simular o desactivar el 17 de mayo.
+- Desbloquear todos los logros.
+- Saltar directamente al final.
+- Reiniciar todo el progreso y las cachés locales.
+
+El panel es una herramienta de prueba, no un sistema de seguridad.
