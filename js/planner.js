@@ -161,7 +161,19 @@
       if(filter==="all")return true;
       if(filter==="later")return p.status==="later";
       if(filter==="scheduled")return p.status==="scheduled";
+      if(filter==="done")return p.status==="done";
       return true;
+    }).sort((a,b)=>{
+      if(a.status==="scheduled" && b.status==="scheduled"){
+        const ad=(a.date||"9999-12-31")+" "+(a.time||"23:59");
+        const bd=(b.date||"9999-12-31")+" "+(b.time||"23:59");
+        return ad.localeCompare(bd);
+      }
+      if(a.status==="scheduled")return -1;
+      if(b.status==="scheduled")return 1;
+      if(a.status==="done" && b.status!=="done")return 1;
+      if(b.status==="done" && a.status!=="done")return -1;
+      return String(b.createdAt||"").localeCompare(String(a.createdAt||""));
     });
 
     if(!visible.length){
