@@ -10,7 +10,8 @@
 
   // Birthday mode: active every 17 May.
   const now=new Date();
-  const isBirthday=now.getMonth()===4 && now.getDate()===17;
+  const forcedBirthday=localStorage.getItem("miranda-force-birthday")==="1";
+  const isBirthday=forcedBirthday || (now.getMonth()===4 && now.getDate()===17);
   if(isBirthday){
     document.body.classList.add("birthday-mode");
     document.getElementById("birthdayBanner")?.classList.remove("hidden");
