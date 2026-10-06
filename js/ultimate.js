@@ -205,7 +205,7 @@
       if(window.mirandaShowScene&&window.mirandaScenes)window.mirandaShowScene(window.mirandaScenes.length-1);
     });
     document.getElementById("devReset")?.addEventListener("click",async()=>{
-      ["miranda-exploration-v1","miranda-special-v1","miranda-ultimate-v1","miranda-force-birthday","miranda-plans-v1","miranda-23-details-v1","miranda-microdetails-v1","miranda-features-v1"].forEach(k=>localStorage.removeItem(k));
+      ["miranda-exploration-v1","miranda-special-v1","miranda-ultimate-v1","miranda-force-birthday","miranda-plans-v1","miranda-23-details-v1","miranda-microdetails-v1","miranda-features-v1","miranda-hints-v1"].forEach(k=>localStorage.removeItem(k));
       if("caches" in window){try{for(const k of await caches.keys())await caches.delete(k);}catch{}}
       if("serviceWorker" in navigator){try{for(const r of await navigator.serviceWorker.getRegistrations())await r.unregister();}catch{}}
       location.reload();
