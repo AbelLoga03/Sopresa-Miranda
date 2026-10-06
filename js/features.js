@@ -106,6 +106,7 @@
     try{
       const parsed=JSON.parse(await file.text());
       if(parsed?.type!=="sorpresa-miranda-backup"||!parsed.data||typeof parsed.data!=="object")throw new Error("Formato no válido");
+      PROGRESS_KEYS.forEach(k=>localStorage.removeItem(k));
       for(const [k,v] of Object.entries(parsed.data)){
         if(PROGRESS_KEYS.includes(k)&&typeof v==="string")localStorage.setItem(k,v);
       }
@@ -172,7 +173,7 @@
   function activeSceneChanged(){
     const active=scenes.find(s=>s.classList.contains("active"));if(!active)return;
     const id=active.dataset.sceneId;if(id===lastActive)return;lastActive=id;
-    if(rareThisSession)return;
+    if(rareThisSession||document.body.classList.contains("cinema-mode"))return;
     if(Math.floor(Math.random()*23)!==22)return;
     rareThisSession=true;state.rareSeen+=1;save();
     const msg=rareMessages[Math.floor(Math.random()*rareMessages.length)];
