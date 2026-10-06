@@ -1,8 +1,8 @@
 const CACHE="miranda-v12";
 const ASSETS=[
   "./","./index.html","./archivo.html","./404.html","./manifest.json",
-  "./css/style.css","./css/extras.css","./css/special.css","./css/ultimate.css","./css/planner.css","./css/chapters.css","./css/microdetails.css","./css/features.css","./css/hints.css","./css/expansion.css","./css/gameplus.css",
-  "./js/app.js","./js/extras.js","./js/special.js","./js/ultimate.js","./js/planner.js","./js/chapters.js","./js/microdetails.js","./js/features.js","./js/hints.js","./js/expansion.js","./js/gameplus.js","./assets/favicon.svg"
+  "./css/style.css","./css/extras.css","./css/special.css","./css/ultimate.css","./css/planner.css","./css/chapters.css","./css/microdetails.css","./css/features.css","./css/hints.css","./css/expansion.css","./css/gameplus.css","./css/personalize.css",
+  "./js/app.js","./js/extras.js","./js/special.js","./js/ultimate.js","./js/planner.js","./js/chapters.js","./js/microdetails.js","./js/features.js","./js/hints.js","./js/expansion.js","./js/gameplus.js","./js/photo-sprite-1.js","./js/photo-sprite-2.js","./js/photo-sprite-3.js","./js/photo-sprite-4.js","./js/photo-sprite-5.js","./js/personalize.js","./assets/favicon.svg"
 ];
 self.addEventListener("install",event=>{
   event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).catch(()=>{}));
