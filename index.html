@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#171219">
-  <meta name="description" content="Una sorpresa de cumpleaños para Miranda">
-  <title>Para Miranda ✨</title>
+  <meta name="theme-color" content="#120f14">
+  <meta name="description" content="Una experiencia de cumpleaños preparada para Miranda">
+  <title>Para Miranda ✦</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -14,254 +14,196 @@
 <body>
   <div class="ambient ambient-one"></div>
   <div class="ambient ambient-two"></div>
+  <div class="tap-effects" id="tapEffects" aria-hidden="true"></div>
 
   <button class="sound-toggle" id="soundToggle" type="button" aria-pressed="false" aria-label="Activar ambiente">
-    <span aria-hidden="true">♪</span>
-    <span class="sound-label">Ambiente</span>
+    <span aria-hidden="true">♪</span><span class="sound-label">Ambiente</span>
   </button>
 
   <main class="experience" id="experience">
     <div class="topbar">
-      <div>
-        <span class="eyebrow" id="chapterLabel">Una pequeña sorpresa</span>
-      </div>
-      <div class="progress-wrap" aria-label="Progreso de la historia">
+      <span class="eyebrow" id="chapterLabel">Una pequeña sorpresa</span>
+      <div class="progress-wrap" aria-label="Progreso">
         <div class="progress-track"><span id="progressBar"></span></div>
-        <span id="stepCounter">1 / 8</span>
+        <span id="stepCounter">1 / 12</span>
       </div>
     </div>
 
-    <section class="scene active intro" data-title="Una pequeña sorpresa">
-      <div class="intro-symbol" aria-hidden="true">✦</div>
+    <section class="scene active intro" data-title="Una pequeña sorpresa" data-scene-id="intro">
+      <button class="intro-symbol secret-trigger" id="secretTrigger" type="button" aria-label="Estrella decorativa">✦</button>
       <p class="kicker">Para Miranda</p>
       <h1>Hay regalos que se abren.<br><em>Este se descubre.</em></h1>
-      <p class="lead">Una pequeña experiencia preparada para guardar recuerdos, momentos y alguna sorpresa.</p>
+      <p class="lead">Una experiencia para recorrer recuerdos, pequeñas sorpresas y momentos que merecen quedarse guardados.</p>
+
+      <div class="countdown-card" id="countdownCard">
+        <span class="countdown-label">Cuenta atrás</span>
+        <div class="countdown" id="countdown">
+          <div><strong id="days">--</strong><span>días</span></div>
+          <div><strong id="hours">--</strong><span>horas</span></div>
+          <div><strong id="minutes">--</strong><span>min</span></div>
+          <div><strong id="seconds">--</strong><span>seg</span></div>
+        </div>
+        <p id="countdownMessage">La fecha se añadirá cuando personalicemos la versión final.</p>
+      </div>
+
       <button class="primary next" type="button">Empezar <span>→</span></button>
-      <p class="tiny-note">Mejor con calma y desde el móvil ✨</p>
+      <p class="tiny-note">Consejo: recórrela despacio. Hay algún secreto escondido.</p>
     </section>
 
-    <section class="scene" data-title="Cómo empezó">
-      <div class="section-heading">
-        <span class="chapter-number">01</span>
-        <div>
-          <p class="kicker">Primer capítulo</p>
-          <h2>Todo empezó por algún sitio</h2>
-        </div>
-      </div>
-
+    <section class="scene" data-title="Nuestra historia" data-scene-id="timeline">
+      <div class="section-heading"><span class="chapter-number">01</span><div><p class="kicker">Nuestra historia</p><h2>Todo empezó por algún sitio</h2></div></div>
       <div class="timeline">
-        <button class="timeline-item memory-card" type="button"
-          data-memory="Aquí puedes escribir cómo os conocisteis, qué recuerdas de ese día o por qué ese momento fue importante.">
-          <span class="timeline-dot"></span>
-          <span class="timeline-date">El comienzo</span>
-          <strong>El día que dio inicio a la historia</strong>
-          <small>Toca para descubrir</small>
-        </button>
-
-        <button class="timeline-item memory-card" type="button"
-          data-memory="Aquí puede ir vuestra primera foto juntos o una anécdota temprana que os haga sonreír.">
-          <span class="timeline-dot"></span>
-          <span class="timeline-date">Un poco después</span>
-          <strong>Un recuerdo que merece quedarse aquí</strong>
-          <small>Toca para descubrir</small>
-        </button>
-
-        <button class="timeline-item memory-card" type="button"
-          data-memory="Este espacio es perfecto para un recuerdo que solo vosotros entendáis.">
-          <span class="timeline-dot"></span>
-          <span class="timeline-date">Uno de muchos</span>
-          <strong>Ese momento que sigue siendo especial</strong>
-          <small>Toca para descubrir</small>
-        </button>
+        <button class="timeline-item memory-card" type="button" data-memory="Aquí irá cómo empezó vuestra historia y una fecha real."><span class="timeline-dot"></span><span class="timeline-date">El comienzo</span><strong>El primer capítulo</strong><small>Toca para descubrir</small></button>
+        <button class="timeline-item memory-card" type="button" data-memory="Aquí pondremos una primera foto, una cita o una anécdota especial."><span class="timeline-dot"></span><span class="timeline-date">Un poco después</span><strong>Un recuerdo que merece quedarse</strong><small>Toca para descubrir</small></button>
+        <button class="timeline-item memory-card" type="button" data-memory="Este espacio puede guardar algo que solo vosotros entendáis."><span class="timeline-dot"></span><span class="timeline-date">Uno de muchos</span><strong>Ese momento que sigue haciendo sonreír</strong><small>Toca para descubrir</small></button>
+        <button class="timeline-item memory-card" type="button" data-memory="Aquí puede ir un momento más reciente para conectar el principio con el presente."><span class="timeline-dot"></span><span class="timeline-date">Ahora</span><strong>Y todavía quedan capítulos</strong><small>Toca para descubrir</small></button>
       </div>
-
-      <div class="reveal-box" id="memoryReveal" aria-live="polite">
-        Toca uno de los recuerdos para abrirlo.
-      </div>
-
-      <div class="actions">
-        <button class="secondary prev" type="button">← Volver</button>
-        <button class="primary next" type="button">Seguir <span>→</span></button>
-      </div>
+      <div class="reveal-box" id="memoryReveal" aria-live="polite">Toca uno de los recuerdos para abrirlo.</div>
+      <div class="actions"><button class="secondary prev" type="button">← Volver</button><button class="primary next" type="button">Seguir <span>→</span></button></div>
     </section>
 
-    <section class="scene" data-title="Nuestros recuerdos">
-      <div class="section-heading">
-        <span class="chapter-number">02</span>
-        <div>
-          <p class="kicker">Recuerdos</p>
-          <h2>Cuatro fotos. Muchísimas historias.</h2>
-        </div>
+    <section class="scene" data-title="Constelación de recuerdos" data-scene-id="constellation">
+      <div class="section-heading"><span class="chapter-number">02</span><div><p class="kicker">Un cielo propio</p><h2>Constelación de recuerdos</h2></div></div>
+      <p class="helper">Cada estrella puede convertirse en un recuerdo real. Toca cualquiera.</p>
+      <div class="constellation" id="constellation">
+        <svg viewBox="0 0 700 360" role="img" aria-label="Constelación decorativa de recuerdos">
+          <path d="M80 250 L190 120 L315 210 L440 90 L585 180 L635 75" />
+          <path d="M315 210 L365 305 L585 180" />
+        </svg>
+        <button class="star s1 constellation-star" type="button" data-memory="El primer recuerdo importante irá aquí." aria-label="Recuerdo 1">✦</button>
+        <button class="star s2 constellation-star" type="button" data-memory="Aquí puede aparecer una foto o una frase corta." aria-label="Recuerdo 2">✧</button>
+        <button class="star s3 constellation-star" type="button" data-memory="Un momento divertido puede vivir en esta estrella." aria-label="Recuerdo 3">✦</button>
+        <button class="star s4 constellation-star" type="button" data-memory="Esta puede ser una de las estrellas principales de vuestra historia." aria-label="Recuerdo 4">✧</button>
+        <button class="star s5 constellation-star" type="button" data-memory="Aquí podemos esconder algo inesperado." aria-label="Recuerdo 5">✦</button>
+        <button class="star s6 constellation-star" type="button" data-memory="Esta estrella puede guardar un plan futuro." aria-label="Recuerdo 6">✧</button>
       </div>
-
-      <div class="photo-grid">
-        <article class="polaroid rotate-left">
-          <div class="photo-placeholder"><span>📷</span></div>
-          <p>Foto favorita #1</p>
-        </article>
-        <article class="polaroid rotate-right">
-          <div class="photo-placeholder"><span>🌙</span></div>
-          <p>Una noche especial</p>
-        </article>
-        <article class="polaroid rotate-left-soft">
-          <div class="photo-placeholder"><span>🌅</span></div>
-          <p>Ese lugar</p>
-        </article>
-        <article class="polaroid rotate-right-soft">
-          <div class="photo-placeholder"><span>✨</span></div>
-          <p>Un momento único</p>
-        </article>
-      </div>
-
-      <p class="helper">Más adelante sustituiremos estas tarjetas por fotografías reales y un texto corto debajo de cada una.</p>
-
-      <div class="actions">
-        <button class="secondary prev" type="button">← Volver</button>
-        <button class="primary next" type="button">Siguiente <span>→</span></button>
-      </div>
+      <div class="reveal-box" id="constellationReveal">Elige una estrella.</div>
+      <div class="actions"><button class="secondary prev" type="button">← Volver</button><button class="primary next" type="button">Ver las fotos <span>→</span></button></div>
     </section>
 
-    <section class="scene" data-title="Un pequeño juego">
-      <div class="section-heading">
-        <span class="chapter-number">03</span>
-        <div>
-          <p class="kicker">Mini juego</p>
-          <h2>¿Cuánto recuerdas?</h2>
-        </div>
+    <section class="scene" data-title="Galería de recuerdos" data-scene-id="gallery">
+      <div class="section-heading"><span class="chapter-number">03</span><div><p class="kicker">Fotos</p><h2>Un pequeño carrete de recuerdos</h2></div></div>
+      <div class="photo-grid" id="photoGrid">
+        <button class="polaroid rotate-left photo-card" type="button" data-caption="Aquí irá el texto de vuestra primera foto favorita."><div class="photo-placeholder">📷</div><p>Foto favorita #1</p></button>
+        <button class="polaroid rotate-right photo-card" type="button" data-caption="Una noche, una salida o un momento que merezca volver a verse."><div class="photo-placeholder">🌙</div><p>Una noche especial</p></button>
+        <button class="polaroid rotate-left-soft photo-card" type="button" data-caption="Aquí puede ir ese sitio que siempre recuerdas."><div class="photo-placeholder">🌅</div><p>Ese lugar</p></button>
+        <button class="polaroid rotate-right-soft photo-card" type="button" data-caption="Esta tarjeta puede convertirse en tu foto preferida de los dos."><div class="photo-placeholder">✨</div><p>Mi favorita</p></button>
       </div>
+      <div class="reveal-box" id="photoReveal">Toca una foto para leer su historia.</div>
+      <button class="random-memory" id="randomMemory" type="button">Llévame a un recuerdo al azar ✦</button>
+      <div class="actions"><button class="secondary prev" type="button">← Volver</button><button class="primary next" type="button">Jugar <span>→</span></button></div>
+    </section>
 
+    <section class="scene" data-title="El juego" data-scene-id="quiz">
+      <div class="section-heading"><span class="chapter-number">04</span><div><p class="kicker">Mini juego</p><h2>¿Cuánto recuerdas?</h2></div></div>
       <div class="quiz-card">
-        <div class="quiz-topline">
-          <span>Pregunta de ejemplo</span>
-          <span>01</span>
-        </div>
-        <h3>¿Cuál de estos podría ser uno de vuestros primeros recuerdos?</h3>
-        <div class="quiz-options">
-          <button class="quiz-option" type="button" data-correct="true">El recuerdo real que añadiremos después</button>
-          <button class="quiz-option" type="button">Una expedición al Polo Norte</button>
-          <button class="quiz-option" type="button">Un viaje secreto a Marte</button>
-        </div>
-        <p class="quiz-result" id="quizResult" aria-live="polite">Después podremos poner preguntas reales sobre vosotros.</p>
+        <div class="quiz-topline"><span id="quizProgress">Pregunta 1 de 3</span><span id="quizScore">0 puntos</span></div>
+        <h3 id="quizQuestion">Cargando pregunta…</h3>
+        <div class="quiz-options" id="quizOptions"></div>
+        <p class="quiz-result" id="quizResult" aria-live="polite">Elige una respuesta.</p>
+        <button class="secondary hidden" id="nextQuestion" type="button">Siguiente pregunta →</button>
       </div>
-
-      <div class="actions">
-        <button class="secondary prev" type="button">← Volver</button>
-        <button class="primary next" type="button">Continuar <span>→</span></button>
-      </div>
+      <div class="actions"><button class="secondary prev" type="button">← Volver</button><button class="primary next" type="button">Continuar <span>→</span></button></div>
     </section>
 
-    <section class="scene" data-title="Pequeños detalles">
-      <div class="section-heading">
-        <span class="chapter-number">04</span>
-        <div>
-          <p class="kicker">Pequeños detalles</p>
-          <h2>Las cosas que hacen especial una historia</h2>
-        </div>
+    <section class="scene" data-title="Nuestros números" data-scene-id="numbers">
+      <div class="section-heading"><span class="chapter-number">05</span><div><p class="kicker">Nuestros números</p><h2>Una historia también se puede contar así</h2></div></div>
+      <div class="number-grid">
+        <article><strong data-count="0" id="daysTogether">—</strong><span>días desde una fecha especial</span></article>
+        <article><strong>∞</strong><span>recuerdos por crear</span></article>
+        <article><strong id="photoCount">4</strong><span>fotos preparadas en la demo</span></article>
+        <article><strong id="secretCount">1</strong><span>secreto escondido</span></article>
       </div>
+      <p class="helper">Cuando me pases las fechas reales podemos calcular automáticamente días, meses y aniversarios.</p>
+      <div class="actions"><button class="secondary prev" type="button">← Volver</button><button class="primary next" type="button">Seguir <span>→</span></button></div>
+    </section>
 
+    <section class="scene" data-title="Pequeños detalles" data-scene-id="reasons">
+      <div class="section-heading"><span class="chapter-number">06</span><div><p class="kicker">Pequeños detalles</p><h2>Cosas que merecen decirse</h2></div></div>
       <div class="reason-card">
         <span class="quote-mark">“</span>
         <p id="reasonText">Aquí aparecerá una razón personal que quieras dedicarle.</p>
-        <button class="secondary" id="reasonButton" type="button">Mostrar otra ✦</button>
+        <button class="secondary" id="reasonButton" type="button">Dime otra ✦</button>
       </div>
-
-      <div class="actions">
-        <button class="secondary prev" type="button">← Volver</button>
-        <button class="primary next" type="button">Abrir mensajes <span>→</span></button>
-      </div>
+      <div class="actions"><button class="secondary prev" type="button">← Volver</button><button class="primary next" type="button">Abrir mensajes <span>→</span></button></div>
     </section>
 
-    <section class="scene" data-title="Ábrelo cuando…">
-      <div class="section-heading">
-        <span class="chapter-number">05</span>
-        <div>
-          <p class="kicker">Mensajes guardados</p>
-          <h2>Ábrelo cuando…</h2>
-        </div>
-      </div>
-
+    <section class="scene" data-title="Ábrelo cuando…" data-scene-id="openwhen">
+      <div class="section-heading"><span class="chapter-number">07</span><div><p class="kicker">Mensajes guardados</p><h2>Ábrelo cuando…</h2></div></div>
       <div class="envelope-grid">
-        <button class="envelope-card open-when" type="button"
-          data-message="Aquí irá un mensaje bonito para un día complicado.">
-          <span class="envelope-icon">☁</span>
-          <strong>…tengas un mal día</strong>
-          <small>Abrir mensaje</small>
-        </button>
-        <button class="envelope-card open-when" type="button"
-          data-message="Aquí podemos poner una anécdota graciosa que siempre os haga reír.">
-          <span class="envelope-icon">☀</span>
-          <strong>…necesites sonreír</strong>
-          <small>Abrir mensaje</small>
-        </button>
-        <button class="envelope-card open-when" type="button"
-          data-message="Aquí puede ir una foto o recuerdo especial.">
-          <span class="envelope-icon">✦</span>
-          <strong>…quieras recordar</strong>
-          <small>Abrir mensaje</small>
-        </button>
-        <button class="envelope-card open-when" type="button"
-          data-message="Este mensaje será exclusivo para el día de su cumpleaños.">
-          <span class="envelope-icon">♡</span>
-          <strong>…sea tu cumpleaños</strong>
-          <small>Abrir mensaje</small>
-        </button>
+        <button class="envelope-card open-when" type="button" data-message="Aquí irá un mensaje bonito para un día complicado."><span class="envelope-icon">☁</span><strong>…tengas un mal día</strong><small>Abrir mensaje</small></button>
+        <button class="envelope-card open-when" type="button" data-message="Aquí puede ir una anécdota que siempre consiga hacer sonreír."><span class="envelope-icon">☀</span><strong>…necesites sonreír</strong><small>Abrir mensaje</small></button>
+        <button class="envelope-card open-when" type="button" data-message="Aquí puede aparecer una fotografía y un recuerdo corto."><span class="envelope-icon">✦</span><strong>…quieras recordar</strong><small>Abrir mensaje</small></button>
+        <button class="envelope-card open-when" type="button" data-message="Este será el mensaje reservado para el cumpleaños."><span class="envelope-icon">♡</span><strong>…sea tu cumpleaños</strong><small>Abrir mensaje</small></button>
       </div>
-
-      <div class="reveal-box" id="openWhenReveal" aria-live="polite">Elige uno de los sobres.</div>
-
-      <div class="actions">
-        <button class="secondary prev" type="button">← Volver</button>
-        <button class="primary next" type="button">Ir a la carta <span>→</span></button>
-      </div>
+      <div class="reveal-box" id="openWhenReveal">Elige uno de los sobres.</div>
+      <div class="actions"><button class="secondary prev" type="button">← Volver</button><button class="primary next" type="button">Ir al futuro <span>→</span></button></div>
     </section>
 
-    <section class="scene" data-title="La carta">
+    <section class="scene" data-title="Cápsula del tiempo" data-scene-id="future">
+      <div class="section-heading"><span class="chapter-number">08</span><div><p class="kicker">Cápsula del tiempo</p><h2>Cosas que todavía quedan por vivir</h2></div></div>
+      <div class="future-grid">
+        <article><span>01</span><strong>Un lugar pendiente</strong><p>Aquí podemos poner un destino al que queráis ir.</p></article>
+        <article><span>02</span><strong>Un plan sencillo</strong><p>Algo pequeño que quieras hacer juntos.</p></article>
+        <article><span>03</span><strong>Una promesa bonita</strong><p>Una idea para guardar y volver a leer más adelante.</p></article>
+        <article><span>04</span><strong>Una aventura</strong><p>Una experiencia que todavía no habéis vivido.</p></article>
+      </div>
+      <div class="actions"><button class="secondary prev" type="button">← Volver</button><button class="primary next" type="button">Elegir un plan <span>→</span></button></div>
+    </section>
+
+    <section class="scene" data-title="Ruleta de planes" data-scene-id="plans">
+      <div class="section-heading"><span class="chapter-number">09</span><div><p class="kicker">Por si algún día falta una idea</p><h2>Ruleta de planes</h2></div></div>
+      <div class="plan-stage">
+        <div class="wheel" id="planWheel" aria-hidden="true"><span>✦</span></div>
+        <p class="plan-result" id="planResult">Pulsa el botón y deja que el azar elija.</p>
+        <button class="primary" id="spinPlan" type="button">Elegir un plan</button>
+      </div>
+      <div class="actions"><button class="secondary prev" type="button">← Volver</button><button class="primary next" type="button">Ir a la carta <span>→</span></button></div>
+    </section>
+
+    <section class="scene" data-title="La carta" data-scene-id="letter">
       <div class="letter-stage">
         <p class="kicker">Capítulo final</p>
-        <h2>Hay algo más que guardar aquí</h2>
+        <h2>Hay algo que merece leerse despacio</h2>
         <p class="helper">Toca el sobre para abrirlo.</p>
-
-        <button class="big-envelope" id="letterButton" type="button" aria-expanded="false" aria-controls="letter">
-          <span class="envelope-flap"></span>
-          <span class="envelope-body">♡</span>
-        </button>
-
+        <button class="big-envelope" id="letterButton" type="button" aria-expanded="false" aria-controls="letter"><span class="envelope-flap"></span><span class="envelope-body">♡</span></button>
         <article class="letter hidden" id="letter">
           <p class="letter-date">Cumpleaños de Miranda</p>
           <h3>Tu carta personal irá aquí</h3>
-          <p>Este espacio está preparado para una carta escrita por ti. Cuando quieras, podemos darle forma usando tus propias palabras y recuerdos.</p>
+          <p>Este espacio está reservado para una carta escrita con tus propias palabras, recuerdos y detalles reales.</p>
+          <p>La versión definitiva puede terminar con una frase corta antes de revelar el regalo o plan sorpresa.</p>
           <p class="letter-signature">— Tu mensaje</p>
         </article>
-
         <button class="primary hidden" id="finalReveal" type="button">Una última sorpresa… <span>→</span></button>
       </div>
-
-      <div class="actions single-back">
-        <button class="secondary prev" type="button">← Volver</button>
-      </div>
+      <div class="actions single-back"><button class="secondary prev" type="button">← Volver</button></div>
     </section>
 
-    <section class="scene finale" data-title="La sorpresa final">
-      <div class="stars" aria-hidden="true">✦ · ✧ · ✦</div>
-      <p class="kicker">Una última cosa</p>
-      <h2>La página era solo una parte del regalo.</h2>
-      <p class="lead">Aquí podremos revelar el regalo real: una cena, una escapada, entradas, una experiencia o cualquier sorpresa que tengas preparada.</p>
-      <div class="gift-card">
-        <span>🎁</span>
-        <div>
-          <small>Sorpresa final</small>
-          <strong>Próximamente…</strong>
-        </div>
+    <section class="scene finale" data-title="La sorpresa final" data-scene-id="finale">
+      <div class="cinema-count hidden" id="cinemaCount" aria-live="polite">3</div>
+      <div id="finalContent">
+        <div class="stars">✦ · ✧ · ✦</div>
+        <p class="kicker">Una última cosa</p>
+        <h2>La página era solo una parte del regalo.</h2>
+        <p class="lead">Aquí aparecerá el regalo real, una cena, una escapada, una experiencia o el último mensaje de la historia.</p>
+        <div class="gift-card"><span>🎁</span><div><small>Sorpresa final</small><strong>Próximamente…</strong></div></div>
+        <div class="completion" id="completionMessage">Has llegado hasta el final.</div>
+        <button class="secondary" id="restartButton" type="button">Volver al principio</button>
       </div>
-      <button class="secondary" id="restartButton" type="button">Volver al principio</button>
     </section>
   </main>
 
-  <footer>
-    <span>Hecho para un día especial</span>
-    <span>✦</span>
-  </footer>
+  <div class="secret-modal hidden" id="secretModal" role="dialog" aria-modal="true" aria-labelledby="secretTitle">
+    <div class="secret-card">
+      <button class="secret-close" id="secretClose" type="button" aria-label="Cerrar">×</button>
+      <span class="secret-star">✦</span>
+      <p class="kicker">Easter egg encontrado</p>
+      <h2 id="secretTitle">Había algo escondido</h2>
+      <p>Este rincón puede guardar una foto secreta, una broma interna o un mensaje que solo aparezca si se descubre el truco.</p>
+    </div>
+  </div>
 
+  <footer><span>Hecho para un día especial</span><span>✦</span></footer>
   <script src="js/app.js"></script>
 </body>
 </html>
