@@ -127,6 +127,7 @@
   let scratching=false, scratched=0;
   function setupCanvas(){
     const r=stage.getBoundingClientRect();
+    if (r.width < 20 || r.height < 20) return;
     const dpr=Math.min(window.devicePixelRatio||1,2);
     canvas.width=Math.max(1,Math.floor(r.width*dpr));
     canvas.height=Math.max(1,Math.floor(r.height*dpr));
@@ -149,6 +150,13 @@
     if(scratched>35){canvas.style.opacity=".18";unlock("scratch");}
   }
   setupCanvas();
+  const secretScene=document.querySelector('[data-scene-id="secrets"]');
+  if(secretScene){
+    const sceneObserver=new MutationObserver(()=>{
+      if(secretScene.classList.contains("active") && !has("scratch")) requestAnimationFrame(setupCanvas);
+    });
+    sceneObserver.observe(secretScene,{attributes:true,attributeFilter:["class"]});
+  }
   window.addEventListener("resize",()=>{if(!has("scratch"))setupCanvas();});
   canvas.addEventListener("pointerdown",e=>{scratching=true;canvas.setPointerCapture(e.pointerId);scratch(e);});
   canvas.addEventListener("pointermove",scratch);
