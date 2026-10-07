@@ -44,7 +44,7 @@
 #photoGrid .polaroid:hover{transform:translateY(-5px) rotate(0deg);z-index:2}
 #photoGrid .polaroid.selected{box-shadow:0 0 0 2px rgba(236,204,216,.65),0 18px 60px rgba(0,0,0,.28)}
 .miranda-photo{
-  aspect-ratio:18/25;
+  aspect-ratio:3/4;
   background-image:var(--miranda-photo-sprite),linear-gradient(145deg,#8b747d,#4d3d45);
   background-size:400% 400%,cover;
   background-repeat:no-repeat;
@@ -79,3 +79,12 @@
   .wish-stars button{width:43px;height:43px}
   .photo-number{font-size:.55rem}
 }
+.photo-viewer{position:fixed;inset:0;z-index:260;background:rgba(5,4,6,.9);backdrop-filter:blur(18px);display:grid;grid-template-columns:minmax(54px,1fr) minmax(280px,520px) minmax(54px,1fr);align-items:center;gap:14px;padding:24px}
+.photo-viewer.hidden{display:none}.photo-viewer-open{overflow:hidden}
+.photo-viewer-stage{justify-self:center;width:min(100%,520px);display:grid;gap:14px}
+.photo-viewer-image{width:min(78vw,430px);max-height:78vh;justify-self:center;border-radius:8px;background-color:#1e191d;box-shadow:0 30px 90px rgba(0,0,0,.6);border:8px solid #efe8e5}
+.photo-viewer-copy{text-align:center}.photo-viewer-copy small{display:block;letter-spacing:.14em;opacity:.45}.photo-viewer-copy strong{display:block;font:700 clamp(1.45rem,4vw,2.2rem) "Cormorant Garamond",serif;margin:.25rem 0}.photo-viewer-copy p{margin:0 auto;max-width:560px;color:rgba(255,255,255,.62);line-height:1.55}
+.photo-viewer-close{position:fixed;right:22px;top:22px;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.17);background:rgba(255,255,255,.06);color:#fff;font-size:1.6rem;cursor:pointer}
+.photo-viewer-nav{width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:#fff;font-size:1.3rem;cursor:pointer;justify-self:center}
+.photo-viewer-nav:hover,.photo-viewer-close:hover{background:rgba(255,255,255,.12)}
+@media(max-width:700px){.photo-viewer{grid-template-columns:44px 1fr 44px;padding:14px 8px}.photo-viewer-image{width:min(78vw,400px);border-width:6px}.photo-viewer-nav{width:42px;height:42px}.photo-viewer-close{right:12px;top:12px}}

@@ -1,5 +1,5 @@
 (() => {
-  const sprite=(window.MIRANDA_SPRITE_PARTS||[]).join("");
+  const sprite=(window.MIRANDA_HQ_SPRITE_PARTS||[]).join("")||(window.MIRANDA_SPRITE_PARTS||[]).join("");
   if(sprite){document.documentElement.style.setProperty("--miranda-photo-sprite",`url("data:image/webp;base64,${sprite}")`);}
   const scene=document.querySelector('.scene[data-scene-id="constellation"]');
   const gallery=document.querySelector('.scene[data-scene-id="gallery"]');
@@ -123,10 +123,55 @@
     ["Esa mirada","Un pequeño detalle convertido en una foto completa."],
     ["Final navideño","Y para cerrar: una foto imposible de colocar en otro sitio sin que robe protagonismo."]
   ];
+  let viewerIndex=0;
+  let photoViewer=document.getElementById("photoViewer");
+  if(!photoViewer){
+    photoViewer=document.createElement("div");
+    photoViewer.id="photoViewer";
+    photoViewer.className="photo-viewer hidden";
+    photoViewer.setAttribute("role","dialog");
+    photoViewer.setAttribute("aria-modal","true");
+    photoViewer.setAttribute("aria-label","Visor de fotografías");
+    photoViewer.innerHTML=`
+      <button class="photo-viewer-close" type="button" aria-label="Cerrar">×</button>
+      <button class="photo-viewer-nav prev-photo" type="button" aria-label="Foto anterior">←</button>
+      <div class="photo-viewer-stage">
+        <div class="photo-viewer-image miranda-photo miranda-photo-1" id="photoViewerImage"></div>
+        <div class="photo-viewer-copy"><small id="photoViewerCount">01 / 16</small><strong id="photoViewerTitle"></strong><p id="photoViewerCaption"></p></div>
+      </div>
+      <button class="photo-viewer-nav next-photo" type="button" aria-label="Foto siguiente">→</button>
+    `;
+    document.body.appendChild(photoViewer);
+  }
+  function showViewer(index){
+    viewerIndex=(index+photos.length)%photos.length;
+    const image=document.getElementById("photoViewerImage");
+    image.className="photo-viewer-image miranda-photo miranda-photo-"+(viewerIndex+1);
+    document.getElementById("photoViewerCount").textContent=String(viewerIndex+1).padStart(2,"0")+" / "+photos.length;
+    document.getElementById("photoViewerTitle").textContent=photos[viewerIndex][0];
+    document.getElementById("photoViewerCaption").textContent=photos[viewerIndex][1];
+    photoViewer.classList.remove("hidden");
+    document.body.classList.add("photo-viewer-open");
+  }
+  function closeViewer(){
+    photoViewer.classList.add("hidden");
+    document.body.classList.remove("photo-viewer-open");
+  }
+  photoViewer.querySelector(".photo-viewer-close").onclick=closeViewer;
+  photoViewer.querySelector(".prev-photo").onclick=()=>showViewer(viewerIndex-1);
+  photoViewer.querySelector(".next-photo").onclick=()=>showViewer(viewerIndex+1);
+  photoViewer.addEventListener("click",e=>{if(e.target===photoViewer)closeViewer();});
+  document.addEventListener("keydown",e=>{
+    if(photoViewer.classList.contains("hidden"))return;
+    if(e.key==="Escape")closeViewer();
+    if(e.key==="ArrowLeft")showViewer(viewerIndex-1);
+    if(e.key==="ArrowRight")showViewer(viewerIndex+1);
+  });
+
   if(photoGrid){
     const rotations=["rotate-left","rotate-right-soft","rotate-left-soft","rotate-right"];
     photoGrid.innerHTML=photos.map((p,i)=>`
-      <button class="polaroid photo-card ${rotations[i%rotations.length]}" type="button" data-caption="${p[1].replace(/"/g,"&quot;")}">
+      <button class="polaroid photo-card ${rotations[i%rotations.length]}" type="button" data-photo-index="${i}" data-caption="${p[1].replace(/"/g,"&quot;")}">
         <div class="photo-placeholder miranda-photo miranda-photo-${i+1}" role="img" aria-label="${p[0]}"></div>
         <p>${p[0]}</p>
         <small class="photo-number">${String(i+1).padStart(2,"0")} / 16</small>
@@ -137,6 +182,7 @@
         document.getElementById("photoReveal").textContent=button.dataset.caption;
         photoGrid.querySelectorAll(".photo-card").forEach(c=>c.classList.remove("selected"));
         button.classList.add("selected");
+        showViewer(Number(button.dataset.photoIndex)||0);
       });
     });
     const count=document.getElementById("photoCount");
