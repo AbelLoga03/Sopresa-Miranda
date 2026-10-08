@@ -1,4 +1,4 @@
-const CACHE="miranda-v14";
+const CACHE="miranda-v15";
 const ASSETS=[
   "./","./index.html","./archivo.html","./404.html","./manifest.json",
   "./css/style.css","./css/extras.css","./css/special.css","./css/ultimate.css","./css/planner.css","./css/chapters.css","./css/microdetails.css","./css/features.css","./css/hints.css","./css/expansion.css","./css/gameplus.css","./css/personalize.css",
