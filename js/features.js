@@ -90,12 +90,13 @@
 
   const PROGRESS_KEYS=[
     "miranda-exploration-v1","miranda-special-v1","miranda-ultimate-v1","miranda-force-birthday",
-    "miranda-plans-v1","miranda-23-details-v1","miranda-microdetails-v1","miranda-features-v1","miranda-hints-v1"
+    "miranda-plans-v1","miranda-23-details-v1","miranda-microdetails-v1","miranda-features-v1","miranda-hints-v1",
+    "miranda-expansion-v1","miranda-gameplus-v1","miranda-wishes-v1"
   ];
   document.getElementById("exportProgress").addEventListener("click",()=>{
     const values={};
     PROGRESS_KEYS.forEach(k=>{const v=localStorage.getItem(k);if(v!==null)values[k]=v;});
-    const payload={type:"sorpresa-miranda-backup",version:1,exportedAt:new Date().toISOString(),data:values};
+    const payload={type:"sorpresa-miranda-backup",version:2,exportedAt:new Date().toISOString(),data:values};
     const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json;charset=utf-8"});
     const url=URL.createObjectURL(blob);const a=document.createElement("a");
     a.href=url;a.download="sorpresa-miranda-progreso-"+today+".json";document.body.appendChild(a);a.click();a.remove();
