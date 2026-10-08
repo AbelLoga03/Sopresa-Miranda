@@ -71,14 +71,33 @@
     {id:"legend",name:"Modo legendario",desc:"Efecto exclusivo para niveles muy altos.",cost:120,level:20,icon:"◆"},
     {id:"master",name:"Corona 23",desc:"El efecto final de la tienda normal.",cost:160,level:23,icon:"23"}
   ];
+  function ensureFxLayer(){
+    let layer=$("gpFxLayer");
+    if(layer)return layer;
+    layer=document.createElement("div");
+    layer.id="gpFxLayer";
+    layer.className="gp-fx-layer";
+    layer.setAttribute("aria-hidden","true");
+    layer.innerHTML='<div class="gp-fx-moon"><span>☾</span></div><div class="gp-fx-aurora"></div><div class="gp-fx-legend"></div><div class="gp-fx-master"><span>♕</span><small>23</small></div>';
+    document.body.prepend(layer);
+    return layer
+  }
   function effects(){
-    document.body.classList.toggle("gp-glow",s.equipped.includes("glow"));document.body.classList.toggle("gp-archive",s.equipped.includes("archive"));document.body.classList.toggle("gp-moon",s.equipped.includes("moon"));document.body.classList.toggle("gp-aurora",s.equipped.includes("aurora"));document.body.classList.toggle("gp-gold",s.equipped.includes("gold"));document.body.classList.toggle("gp-legend",s.equipped.includes("legend"));document.body.classList.toggle("gp-master",s.equipped.includes("master"));
-    let l=$("gpStarLayer");if(s.equipped.includes("sparkles")&&!l){l=document.createElement("div");l.id="gpStarLayer";l.className="gp-star-layer";l.innerHTML=Array.from({length:18},(_,i)=>'<i style="left:'+((i*37)%100)+'%;top:'+((i*53)%95)+'%">✦</i>').join("");document.body.appendChild(l)}else if(!s.equipped.includes("sparkles"))l?.remove()
+    const ids=["glow","archive","moon","aurora","gold","legend","master"];
+    ids.forEach(id=>document.body.classList.toggle("gp-"+id,s.equipped.includes(id)));
+    ensureFxLayer();
+
+    let l=$("gpStarLayer");
+    if(s.equipped.includes("sparkles")&&!l){
+      l=document.createElement("div");l.id="gpStarLayer";l.className="gp-star-layer";
+      l.innerHTML=Array.from({length:28},(_,i)=>'<i style="left:'+((i*37)%100)+'%;top:'+((i*53)%95)+'%;animation-delay:'+((i%7)*.35)+'s;animation-duration:'+(2.6+(i%5)*.45)+'s">✦</i>').join("");
+      document.body.appendChild(l)
+    }else if(!s.equipped.includes("sparkles"))l?.remove()
   }
   function shopView(){
     const level=lev().n;
     $("shopGrid").innerHTML=shop.map(x=>{const own=s.shop.includes(x.id),on=s.equipped.includes(x.id),locked=level<x.level,poor=s.coins<x.cost;let label=own?(on?"Quitar efecto":"Usar efecto"):(locked?"Nivel "+x.level+" requerido":poor?"Faltan "+(x.cost-s.coins)+" ✦":x.cost+" ✦");return '<article class="shop-item '+(locked?"level-locked ":"")+(own?"owned ":"")+'"><div class="shop-icon">'+x.icon+'</div><div class="shop-copy"><div class="shop-top"><strong>'+x.name+'</strong><span>Nivel '+x.level+'</span></div><small>'+x.desc+'</small><div class="shop-price"><b>'+x.cost+' ✦</b><em>'+(own?"Comprado":locked?"Bloqueado por nivel":poor?"Ahorra "+(x.cost-s.coins)+" más":"Disponible")+'</em></div></div><button type="button" data-shop="'+x.id+'" class="secondary" aria-disabled="'+(!own&&locked)+'">'+label+'</button></article>'}).join("");
-    $("shopGrid").querySelectorAll("[data-shop]").forEach(btn=>btn.onclick=()=>{const x=shop.find(y=>y.id===btn.dataset.shop);if(!x)return;const level=lev().n;if(!s.shop.includes(x.id)){if(level<x.level)return note("Nivel insuficiente","Necesitas nivel "+x.level+". Ahora estás en nivel "+level+".");if(s.coins<x.cost)return note("Saldo insuficiente","Te faltan "+(x.cost-s.coins)+" Miranditos.");s.coins-=x.cost;s.shop.push(x.id);s.equipped.push(x.id);note("Compra desbloqueada",x.name)}else{const on=s.equipped.includes(x.id);s.equipped=on?s.equipped.filter(z=>z!==x.id):[...s.equipped,x.id]}save();render()})
+    $("shopGrid").querySelectorAll("[data-shop]").forEach(btn=>btn.onclick=()=>{const x=shop.find(y=>y.id===btn.dataset.shop);if(!x)return;const level=lev().n;if(!s.shop.includes(x.id)){if(level<x.level)return note("Nivel insuficiente","Necesitas nivel "+x.level+". Ahora estás en nivel "+level+".");if(s.coins<x.cost)return note("Saldo insuficiente","Te faltan "+(x.cost-s.coins)+" Miranditos.");s.coins-=x.cost;s.shop.push(x.id);s.equipped.push(x.id);note("Compra desbloqueada",x.name)}else{const on=s.equipped.includes(x.id);s.equipped=on?s.equipped.filter(z=>z!==x.id):[...s.equipped,x.id];note(on?"Efecto desactivado":"Efecto activado",x.name)}save();render()})
   }
   function earnView(){const b=base();const rows=[["Capítulos","Cada capítulo nuevo","2 XP · 1 ✦",Math.min(23,new Set(b.visited).size)+"/23"],["Detalles","Cada detalle secreto","6 XP · 2 ✦",Math.min(23,b.details.length)+"/23"],["Mini secretos","Cada mini secreto","15 XP · 4 ✦",Math.min(5,b.tokens.length)+"/5"],["Logros","Cada logro conseguido","12 XP · 3 ✦",b.ach.length+"/"+b.total],["Misión diaria","Completar la misión del día","25 XP · 8 ✦",s.daily.done?"Hecha":"Pendiente"],["Caja diaria","Reclamar una vez al día","5–12 ✦","Diaria"],["Actividades","Ruleta, fotos, deseos, oráculo…","1–3 ✦","Bonus diarios"],["Nivel","Cada nuevo nivel","Bonus creciente","Automático"]];$("earnGrid").innerHTML=rows.map(r=>'<article><div><strong>'+r[0]+'</strong><small>'+r[1]+'</small></div><span>'+r[2]+'</span><em>'+r[3]+'</em></article>').join("")}
   function chestView(){const t=dayKey(),claimed=s.dailyChest.date===t,streak=Math.max(0,Number(s.dailyChest.streak)||0);$("chestTitle").textContent=claimed?"Caja reclamada · racha "+streak:"Caja de Miranditos · racha "+streak;$("chestInfo").textContent=claimed?"La próxima se podrá reclamar mañana.":"Premio de hoy: "+Math.min(12,5+Math.max(0,streak))+" Miranditos.";$("claimChest").disabled=claimed;$("claimChest").textContent=claimed?"Reclamada ✓":"Reclamar caja ✦"}
