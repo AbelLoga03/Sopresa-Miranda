@@ -23,3 +23,57 @@ body.gp-legend .game-profile{box-shadow:0 0 45px rgba(210,160,200,.10) inset;bor
 body.gp-master .game-avatar{box-shadow:0 0 0 2px rgba(245,222,154,.16),0 0 32px rgba(245,222,154,.12)}
 @media(max-width:800px){.shop-grid{grid-template-columns:1fr!important}.earn-grid{grid-template-columns:1fr}.daily-chest{align-items:flex-start;flex-direction:column}.daily-chest button{width:100%}}
 @media(prefers-reduced-motion:reduce){body.gp-aurora:after{animation:none}}
+
+
+/* EFECTOS VISUALES TIENDA V2 */
+body.gp-moon:before,body.gp-aurora:after{content:none!important}
+.gp-fx-layer{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.gp-fx-layer>div{position:absolute;inset:0;opacity:0;transition:opacity .45s ease}
+body.gp-glow .gp-fx-layer:before{content:"";position:absolute;inset:-10%;background:radial-gradient(circle at 50% 35%,rgba(238,195,216,.16),transparent 40%),radial-gradient(circle at 20% 82%,rgba(205,179,130,.10),transparent 30%);filter:blur(20px);animation:gpGlowBreath 5s ease-in-out infinite alternate}
+@keyframes gpGlowBreath{to{opacity:.55;transform:scale(1.04)}}
+
+.gp-fx-moon:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 82% 14%,rgba(183,205,245,.22),transparent 25%),linear-gradient(rgba(53,64,91,.08),rgba(18,15,20,0) 58%)}
+.gp-fx-moon span{position:absolute;right:5vw;top:9vh;font-size:clamp(5rem,12vw,10rem);line-height:1;color:rgba(218,229,255,.18);filter:drop-shadow(0 0 32px rgba(182,204,255,.28));transform:rotate(-12deg)}
+body.gp-moon .gp-fx-moon{opacity:1}
+
+.gp-fx-aurora{inset:-30%!important;background:conic-gradient(from 115deg at 55% 45%,transparent 0 13%,rgba(112,218,196,.16) 18%,rgba(132,174,232,.12) 26%,rgba(229,155,218,.14) 35%,transparent 46% 100%);filter:blur(58px);animation:gpAuroraV2 14s ease-in-out infinite alternate}
+body.gp-aurora .gp-fx-aurora{opacity:1}
+@keyframes gpAuroraV2{0%{transform:translate3d(-6%,-2%,0) rotate(-8deg) scale(1)}100%{transform:translate3d(8%,5%,0) rotate(10deg) scale(1.12)}}
+
+.gp-fx-legend{background:
+ radial-gradient(circle at 8% 18%,rgba(255,255,255,.55) 0 1px,transparent 1.8px),
+ radial-gradient(circle at 23% 68%,rgba(236,201,224,.48) 0 1px,transparent 1.8px),
+ radial-gradient(circle at 42% 12%,rgba(255,255,255,.42) 0 1.2px,transparent 2px),
+ radial-gradient(circle at 59% 77%,rgba(218,190,239,.42) 0 1px,transparent 1.8px),
+ radial-gradient(circle at 77% 35%,rgba(255,255,255,.48) 0 1px,transparent 1.8px),
+ radial-gradient(circle at 92% 82%,rgba(236,203,219,.5) 0 1.2px,transparent 2px),
+ radial-gradient(circle at 50% 50%,rgba(161,111,173,.08),transparent 56%);
+ background-size:210px 210px,260px 260px,300px 300px,330px 330px,380px 380px,430px 430px,100% 100%;
+ animation:gpLegendDrift 16s linear infinite}
+body.gp-legend .gp-fx-legend{opacity:.9}
+@keyframes gpLegendDrift{to{transform:translate3d(18px,-22px,0)}}
+
+.gp-fx-master{inset:auto 18px 74px auto!important;width:76px;height:76px;border-radius:50%;border:1px solid rgba(245,222,154,.24);background:rgba(20,16,18,.42);backdrop-filter:blur(8px);display:grid;place-items:center;align-content:center;box-shadow:0 0 40px rgba(245,222,154,.13)}
+.gp-fx-master span{font-size:1.35rem;color:rgba(245,222,154,.7);line-height:1}.gp-fx-master small{font:700 .9rem "Cormorant Garamond",serif;color:rgba(245,222,154,.65);letter-spacing:.06em}
+body.gp-master .gp-fx-master{opacity:1}
+
+body.gp-archive .gp-fx-layer:after{content:"";position:absolute;inset:0;opacity:.18;background:repeating-linear-gradient(0deg,transparent 0 4px,rgba(255,255,255,.03) 5px);mix-blend-mode:screen}
+body.gp-archive .experience:before{content:"ARCHIVO 23 // CLASIFICADO";position:fixed;left:22px;bottom:22px;z-index:8;font-size:.58rem;letter-spacing:.18em;color:rgba(255,255,255,.28);pointer-events:none}
+body.gp-archive .scene.active{outline:1px dashed rgba(235,213,221,.16);outline-offset:8px}
+
+body.gp-gold{--accent:#d5b76c;--accent2:#f1d99b;--gold:#f4cf72}
+body.gp-gold .primary{background:linear-gradient(135deg,#d7b65e,#aa8134);box-shadow:0 10px 32px rgba(211,171,76,.2)}
+body.gp-gold .progress-track span{background:linear-gradient(90deg,#f1d99b,#c39138)}
+body.gp-gold .miranda-hub-toggle{box-shadow:0 0 0 1px rgba(245,222,154,.4),0 0 38px rgba(245,222,154,.2),0 18px 50px rgba(0,0,0,.35)!important}
+
+body.gp-legend .scene.active .kicker{color:#ddb7da;text-shadow:0 0 18px rgba(221,183,218,.28)}
+body.gp-legend .stars{filter:drop-shadow(0 0 10px rgba(224,185,220,.45))}
+body.gp-master .progress-track{box-shadow:0 0 16px rgba(245,222,154,.22)}
+body.gp-master .miranda-hub-toggle:before{content:"♕";margin-right:4px;color:#f1d99b}
+
+.gp-star-layer{z-index:3!important}
+.gp-star-layer i{font-size:clamp(11px,1.4vw,18px)!important;opacity:.34!important;text-shadow:0 0 10px rgba(247,221,230,.42)}
+@keyframes gpStar{0%,100%{opacity:.15;transform:translateY(0) scale(.8)}50%{opacity:.85;transform:translateY(-8px) scale(1.45)}}
+
+@media(max-width:650px){.gp-fx-moon span{right:2vw;top:10vh}.gp-fx-master{width:58px;height:58px;right:10px;bottom:68px}body.gp-archive .experience:before{left:10px;bottom:72px}}
+@media(prefers-reduced-motion:reduce){body.gp-glow .gp-fx-layer:before,.gp-fx-aurora,.gp-fx-legend,.gp-star-layer i{animation:none!important}}
